@@ -1,14 +1,3 @@
-
--- USER is a reserved keyword with Postgres
--- You must use double quotes in every query that user is in:
--- ex. SELECT * FROM "user";
--- Otherwise you will have errors!
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
-
 -- UPDATED SQL
 
 -- "user" table
@@ -107,5 +96,18 @@ INSERT INTO "achievement" ("boardgame_id", "title", "requirement", "difficulty")
 	('5', 'Everdell achievement 1', 'Everdell requirement 1', 'easy'),
 	('5', 'Everdell achievement 2', 'Everdell requirement 2', 'moderate'),
 	('5', 'Everdell achievement 3', 'Everdell requirement 3', 'hard');
+	
+-- Add some test completed achievements to user id 1
 
-    
+INSERT INTO "user_achievement_list" ("user_id", "achievement_id", "completed", "date_completed")
+	VALUES (1, 1, true, CURRENT_DATE),
+	(1, 2, true, CURRENT_DATE),
+	(1, 3, false, CURRENT_DATE),
+	(1, 7, true, CURRENT_DATE),
+	(1, 8, true, CURRENT_DATE),
+	(1, 9, true, CURRENT_DATE),
+	(1, 13, true, CURRENT_DATE),
+	(1, 14, false, CURRENT_DATE),
+	(1, 15, false, CURRENT_DATE);
+	
+DELETE FROM "user_achievement_list" WHERE user_id = 1;

@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+  const achievements = useSelector(store => store.profileAchievement);
 
   const history = useHistory();
 
@@ -18,8 +19,6 @@ function UserPage() {
 
   return (
     <div className="container">
-      {/* <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p> */}
       <img src={user.profile_image_url} height="100px" />
       <br />
       <h3>{user.first_name} {user.last_name}</h3>
@@ -34,7 +33,7 @@ function UserPage() {
         </thead>
         <tbody>
           <tr>
-            <td>Placeholder Game</td>
+            <td>{achievements[0]}</td>
             <td>Placeholder Achievement</td>
           </tr>
         </tbody>
