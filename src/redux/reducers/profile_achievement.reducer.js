@@ -1,4 +1,4 @@
-const profileAchievementReducer = (state = ['banana'], action) => {
+const profileAchievementReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_PROFILE_ACHIEVEMENTS':
         return action.payload;
