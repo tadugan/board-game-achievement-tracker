@@ -1,4 +1,5 @@
 const profileAchievementReducer = (state = [], action) => {
+    console.log('We got into profileAchievementReducer'); // test
     switch (action.type) {
       case 'SET_PROFILE_ACHIEVEMENTS':
         return action.payload;

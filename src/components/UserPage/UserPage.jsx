@@ -46,10 +46,14 @@ function UserPage() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>{achievements[0]}</td>
-            <td>Placeholder Achievement</td>
-          </tr>
+          {achievements.map((achievement, index) => {
+            return (
+              <tr key={index}>
+                <td>{achievement.name}</td>
+                <td>{achievement.title}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <Button 

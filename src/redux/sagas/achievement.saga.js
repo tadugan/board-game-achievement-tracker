@@ -2,6 +2,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* getProfileAchievements() {
+    console.log('We got into getProfileAchievements'); // test
     try {
         const profileAchievements = yield axios.get('/achievement/profile');
         yield put({ type: 'SET_PROFILE_ACHIEVEMENTS', payload: profileAchievements.data })
@@ -13,3 +14,5 @@ function* getProfileAchievements() {
 function* achievementSaga() {
     yield takeLatest('GET_PROFILE_ACHIEVEMENTS', getProfileAchievements);
 }
+
+export default achievementSaga;
