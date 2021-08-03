@@ -19,6 +19,9 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import BoardgameList from '../BoardgameList/BoardgameList';
+import Achievement from '../Achievement/Achievement';
+import Admin from '../Admin/Admin';
 
 import './App.css';
 
@@ -64,6 +67,30 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows BoardgameList else shows LoginPage
+            exact
+            path="/boardgame"
+          >
+            <BoardgameList />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows Achievement else shows LoginPage
+            exact
+            path="/achievement"
+          >
+            <Achievement />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows Admin else shows LoginPage
+            exact
+            path="/admin"
+          >
+            <Admin />
           </ProtectedRoute>
 
           {/* When a value is supplied for the authRedirect prop the user will

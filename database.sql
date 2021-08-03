@@ -107,3 +107,5 @@ INSERT INTO "achievement" ("boardgame_id", "title", "requirement", "difficulty")
 	('5', 'Everdell achievement 1', 'Everdell requirement 1', 'easy'),
 	('5', 'Everdell achievement 2', 'Everdell requirement 2', 'moderate'),
 	('5', 'Everdell achievement 3', 'Everdell requirement 3', 'hard');
+
+    
