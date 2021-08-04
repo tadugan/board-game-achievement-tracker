@@ -34,12 +34,14 @@ function BoardgameDetails() {
 
   const dispatch = useDispatch();
   const params = useParams();
-  const boardgameDetails = useSelector(store => store.gameDetails); 
+  const boardgameDetails = useSelector(store => store.gameDetails);
+  const boardgameAchievements = useSelector(store => store.gameAchievements);
 
   const getBoardgameDetails = (gameId) => {
     console.log('gameId is:', gameId); // test
 
     dispatch({ type: 'GET_GAME_DETAILS', payload: { id: gameId }});
+    dispatch({ type: 'GET_GAME_ACHIEVEMENTS', payload: { id: gameId }});
   }
 
   useEffect(() => {
@@ -107,16 +109,20 @@ function BoardgameDetails() {
                 xs={10}
             >
                 <h3>Achievements:</h3>
-                <Card className={classes.card}>
-                    <CardContent>
-                        <Typography variant="h5" component="h2">
-                        Achievement Title
-                        </Typography>
-                        <Typography variant="body2" component="p">
-                        Achievement Requirement
-                        </Typography>
-                    </CardContent>
-                </Card>
+                {boardgameAchievements.map((achievement, index) => {
+                    return (
+                        <Card className={classes.card} key={index}>
+                            <CardContent>
+                                <Typography variant="h5" component="h2">
+                                    {achievement.title}
+                                </Typography>
+                                <Typography variant="body2" component="p">
+                                    {achievement.requirement}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    );
+                })}
             </Grid>
         </Grid>
       </div>

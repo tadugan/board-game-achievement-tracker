@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 
 /**
  * GET details for one boardgame
- * /boardgame/:id returns the details and achievements for one boardgame
+ * /boardgame/:id returns the details for one boardgame
  */
  router.get('/:id', (req, res) => {
   const gameId = req.params.id;
