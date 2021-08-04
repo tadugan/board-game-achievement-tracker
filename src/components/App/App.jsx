@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import BoardgameList from '../BoardgameList/BoardgameList';
+import BoardgameDetails from '../BoardgameDetails/BoardgameDetails';
 import Achievement from '../Achievement/Achievement';
 import Admin from '../Admin/Admin';
 
@@ -75,6 +76,14 @@ function App() {
             path="/boardgame"
           >
             <BoardgameList />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows BoardgameList else shows LoginPage
+            exact
+            path="/boardgame/:id"
+          >
+            <BoardgameDetails />
           </ProtectedRoute>
 
           <ProtectedRoute

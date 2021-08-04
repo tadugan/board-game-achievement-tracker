@@ -10,6 +10,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -27,12 +28,19 @@ function BoardgameList() {
   const classes = useStyles();
 
   const dispatch = useDispatch();
+  const history = useHistory();
   const games = useSelector(store => store.boardgames);
 
   const getAllBoardgames = () => {
       console.log('GETting all boardgames to display'); // test
 
       dispatch({ type: 'GET_ALL_BOARDGAMES' });
+  }
+
+  const handleClick = (gameId) => {
+      console.log('game id is:', gameId);
+
+      history.push(`/boardgame/${gameId}`);
   }
 
   useEffect(() => {
@@ -51,8 +59,11 @@ function BoardgameList() {
       >
         {games.map((game, index) => {
           return (
-            <Grid item key={index} className={classes.container}>
-                <Card className={classes.root}>
+            <Grid item key={index}>
+                <Card 
+                  className={classes.root}
+                  onClick={() => handleClick(game.id)}
+                >
                   <CardActionArea>
                     <CardMedia
                       className={classes.media}
