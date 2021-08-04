@@ -20,9 +20,6 @@ const useStyles = makeStyles({
     width: 140,
     height: 180,
   },
-  container: {
-    padding: 20,
-  },
 });
 
 function BoardgameList() {
