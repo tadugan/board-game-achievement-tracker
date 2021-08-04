@@ -1,18 +1,23 @@
+import { Grid } from '@material-ui/core';
 import React, { useState } from 'react';
-import {useSelector} from 'react-redux';
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
+
 function BoardgameList() {
-  // Using hooks we're creating local state for a "heading" variable with
-  // a default value of 'Functional Component'
-  const store = useSelector((store) => store);
-  const [heading, setHeading] = useState('BoardgameList');
 
   return (
     <div>
-      <h2>{heading}</h2>
+      <h2>Boardgame List</h2>
+      <Grid 
+        container
+        spacing={10}
+        direction="row"
+        justifyContent="center"
+        alignItems="flex-start"
+      >
+          <Grid item>
+            <p>banana</p>
+          </Grid>
+      </Grid>
     </div>
   );
 }
