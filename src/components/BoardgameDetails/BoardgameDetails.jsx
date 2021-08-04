@@ -1,11 +1,12 @@
 import { Button, Grid, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles({
     root: {
@@ -31,7 +32,18 @@ function BoardgameDetails() {
 
   const classes = useStyles();
 
+  const dispatch = useDispatch();
   const params = useParams(); 
+
+  const getBoardgameDetails = (gameId) => {
+    console.log('gameId is:', gameId); // test
+
+    dispatch({ type: 'GET_GAME_DETAILS', payload: { id: gameId }});
+  }
+
+  useEffect(() => {
+    getBoardgameDetails(params.id);
+  }, []);
 
   return (
     <div>
