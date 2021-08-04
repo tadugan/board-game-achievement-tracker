@@ -15,7 +15,7 @@ function* getGameDetails(action) {
     const gameId = action.payload.id;
     try {
         const gameDetails = yield axios.get(`/boardgame/${gameId}`);
-        yield put({ type: 'SET_GAME_DETAILS', payload: gameDetails.data});
+        yield put({ type: 'SET_GAME_DETAILS', payload: gameDetails.data[0]});
     } catch (error) {
         console.log('Error GETTING Board Game details. Error:', error);
     }

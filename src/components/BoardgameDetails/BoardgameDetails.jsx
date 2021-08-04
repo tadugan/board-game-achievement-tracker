@@ -33,7 +33,8 @@ function BoardgameDetails() {
   const classes = useStyles();
 
   const dispatch = useDispatch();
-  const params = useParams(); 
+  const params = useParams();
+  const boardgameDetails = useSelector(store => store.gameDetails); 
 
   const getBoardgameDetails = (gameId) => {
     console.log('gameId is:', gameId); // test
@@ -46,9 +47,8 @@ function BoardgameDetails() {
   }, []);
 
   return (
-    <div>
-      <h2>Boardgame Details</h2>
-      <p>Game Id: {params.id}</p>
+    <div className={classes.root}>
+      <h2>Game Details</h2>
       <div>
         <Grid 
             container 
@@ -56,14 +56,13 @@ function BoardgameDetails() {
             direction="row"
             justifyContent="center"
             alignItems="center"
-            className={classes.root}
         >
             <Grid 
                 item 
                 xs={5}
             >
                 <img 
-                src="https://cf.geekdo-images.com/fjE7V5LNq31yVEW_yuqI-Q__opengraph/img/_PznTHzy-oaTKt6SEVzuhxcCRsw=/fit-in/1200x630/filters:strip_icc()/pic3918905.png" 
+                src={boardgameDetails.image_url} 
                 height="150px"
                 width="150px"
                 />
@@ -72,14 +71,14 @@ function BoardgameDetails() {
                 item
                 xs={4}
             >
-                <div>PUBLISHER</div>
+                <div>{boardgameDetails.publisher}</div>
                 <div>DATE</div>
             </Grid>
             <Grid
                 item
                 xs={12}
             >
-                <h3>GAME TITLE</h3>
+                <h3>{boardgameDetails.name}</h3>
             </Grid>
             <Grid
                 item
@@ -105,8 +104,9 @@ function BoardgameDetails() {
             </Grid>
             <Grid
                 item
-                xs={7}
+                xs={10}
             >
+                <h3>Achievements:</h3>
                 <Card className={classes.card}>
                     <CardContent>
                         <Typography variant="h5" component="h2">
