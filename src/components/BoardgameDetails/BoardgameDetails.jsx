@@ -1,12 +1,12 @@
 import { Button, Grid, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { useEffect } from 'react';
+import BackButton from '../BackButton/BackButton';
 
 const useStyles = makeStyles({
     root: {
@@ -33,15 +33,27 @@ function BoardgameDetails() {
   const classes = useStyles();
 
   const dispatch = useDispatch();
+  const history = useHistory();
   const params = useParams();
   const boardgameDetails = useSelector(store => store.gameDetails);
   const boardgameAchievements = useSelector(store => store.gameAchievements);
 
   const getBoardgameDetails = (gameId) => {
-    console.log('gameId is:', gameId); // test
-
     dispatch({ type: 'GET_GAME_DETAILS', payload: { id: gameId }});
     dispatch({ type: 'GET_GAME_ACHIEVEMENTS', payload: { id: gameId }});
+  }
+
+  const addToCollection = (gameId) => {
+    dispatch({ type: 'ADD_TO_COLLECTION', payload: 
+        { 
+            id: gameId,
+            achievements: boardgameAchievements
+        }
+    })
+  }
+
+  const routeUser = (destination) => {
+    history.push(destination);
   }
 
   useEffect(() => {
@@ -51,6 +63,7 @@ function BoardgameDetails() {
   return (
     <div className={classes.root}>
       <h2>Game Details</h2>
+      <BackButton destination="/boardgame"/>
       <div>
         <Grid 
             container 
@@ -89,6 +102,7 @@ function BoardgameDetails() {
                 <Button
                     variant="contained"
                     color="secondary"
+                    onClick={() => addToCollection(params.id)}
                 >
                     Add To Collection
                 </Button>
@@ -100,6 +114,7 @@ function BoardgameDetails() {
                 <Button
                     variant="contained"
                     color="primary"
+                    onClick={() => routeUser('/boardgame')}
                 >
                     Return to List
                 </Button>

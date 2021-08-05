@@ -11,6 +11,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { useHistory } from 'react-router-dom';
+import BackButton from '../BackButton/BackButton';
 
 const useStyles = makeStyles({
   root: {
@@ -50,6 +51,7 @@ function BoardgameList() {
   return (
     <div>
       <h2>Boardgame List</h2>
+      <BackButton destination="/user" />
       <Grid 
         container
         spacing={1}
@@ -67,7 +69,8 @@ function BoardgameList() {
                   <CardActionArea>
                     <CardMedia
                       className={classes.media}
-                      image={game.image_url}
+                      // Adding an alternate image route stops the client from throwing an error before the useEffect gets the image url
+                      image={game.image_url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Blank_square.svg/1200px-Blank_square.svg.png'}
                       title={game.name}
                       spacing="0"
                     />

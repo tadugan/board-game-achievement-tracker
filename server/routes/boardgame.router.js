@@ -19,6 +19,7 @@ router.get('/', (req, res) => {
     })
     .catch(error => {
         console.log('Error getting all boardgames. Error:', error);
+        res.sendStatus(500);
     });
 });
 
@@ -41,6 +42,7 @@ router.get('/', (req, res) => {
     })
     .catch(error => {
         console.log('Error getting board game details. Error:', error);
+        res.sendStatus(500);
     });
 });
 
