@@ -27,6 +27,7 @@ router.get('/profile', rejectUnauthenticated, (req, res) => {
         })
         .catch(error => {
             console.log('Error getting achievements for profile. Error:', error);
+            res.sendStatus(500);
         });
 });
 
@@ -51,6 +52,7 @@ router.get('/profile', rejectUnauthenticated, (req, res) => {
     })
     .catch(error => {
         console.log('Error getting board game achievements. Error:', error);
+        res.sendStatus(500);
     });
 });
 

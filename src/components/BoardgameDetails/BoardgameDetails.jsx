@@ -43,7 +43,12 @@ function BoardgameDetails() {
   }
 
   const addToCollection = (gameId) => {
-    dispatch({ type: 'ADD_TO_COLLECTION', payload: { id: gameId }})
+    dispatch({ type: 'ADD_TO_COLLECTION', payload: 
+        { 
+            id: gameId,
+            achievements: boardgameAchievements
+        }
+    })
   }
 
   useEffect(() => {
