@@ -25,8 +25,19 @@ import Achievement from '../Achievement/Achievement';
 import Admin from '../Admin/Admin';
 
 import './App.css';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles({
+  root: {
+    textAlign: 'center',
+    paddingBottom: '56px',
+  },
+});
 
 function App() {
+  
+  const classes = useStyles();
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,7 +46,7 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <div className={classes.root}>
         {/* <Nav /> */}
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}

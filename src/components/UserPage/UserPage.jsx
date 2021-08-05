@@ -15,7 +15,7 @@ function UserPage() {
 
   // Sends the user to a destination component when a button is pressed
   const handleClick = (destination) => {
-    console.log('click');
+    console.log('click'); // test
     
     history.push(destination);
   }

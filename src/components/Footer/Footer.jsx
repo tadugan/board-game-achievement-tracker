@@ -2,40 +2,57 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+import { AddCircle, Casino, Person } from '@material-ui/icons';
 
 const useStyles = makeStyles({
   root: {
-    width: '100vw',
+    textAlign: 'center',
+  },
+  stickToBottom: {
+    width: '100%',
+    position: 'fixed',
+    bottom: 0,
   },
 });
 
 import './Footer.css';
-
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
+import { useHistory } from 'react-router-dom';
 
 function Footer() {
 
   const classes = useStyles();
 
+  const history = useHistory();
+
+  const handleClick = (destination) => {
+    history.push(destination);
+  }
+
   return (
-    <footer>
+    <footer className={classes.root}>
       <BottomNavigation
         // value={value}
         // onChange={(event, newValue) => {
         //   setValue(newValue);
         // }}
         showLabels
-        className={classes.root}
+        className={classes.stickToBottom}
       >
-        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+        <BottomNavigationAction 
+          label="Profile" 
+          icon={<Person />}
+          onClick={() => {handleClick('/user')}}
+        />
+        <BottomNavigationAction 
+          label="Collection" 
+          icon={<Casino />} 
+          onClick={() => {handleClick('/user')}}
+        />
+        <BottomNavigationAction 
+          label="Add Game" 
+          icon={<AddCircle />}
+          onClick={() => {handleClick('/boardgame')}} 
+        />
       </BottomNavigation>
     </footer>
   );
