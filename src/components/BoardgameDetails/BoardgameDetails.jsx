@@ -1,7 +1,7 @@
 import { Button, Grid, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -33,6 +33,7 @@ function BoardgameDetails() {
   const classes = useStyles();
 
   const dispatch = useDispatch();
+  const history = useHistory();
   const params = useParams();
   const boardgameDetails = useSelector(store => store.gameDetails);
   const boardgameAchievements = useSelector(store => store.gameAchievements);
@@ -49,6 +50,10 @@ function BoardgameDetails() {
             achievements: boardgameAchievements
         }
     })
+  }
+
+  const routeUser = (destination) => {
+    history.push(destination);
   }
 
   useEffect(() => {
@@ -108,6 +113,7 @@ function BoardgameDetails() {
                 <Button
                     variant="contained"
                     color="primary"
+                    onClick={() => routeUser('/boardgame')}
                 >
                     Return to List
                 </Button>
