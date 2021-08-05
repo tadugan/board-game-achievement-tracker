@@ -11,6 +11,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { useHistory } from 'react-router-dom';
+import BackButton from '../BackButton/BackButton';
 
 const useStyles = makeStyles({
   root: {
@@ -57,6 +58,9 @@ function BoardgameList() {
         justifyContent="center"
         alignItems="flex-start"
       >
+            <Grid item xs={12}>
+              <BackButton destination="/user" />
+            </Grid>
         {games.map((game, index) => {
           return (
             <Grid item key={index}>
