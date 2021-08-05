@@ -6,6 +6,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { useEffect } from 'react';
+import BackButton from '../BackButton/BackButton';
 
 const useStyles = makeStyles({
     root: {
@@ -62,6 +63,7 @@ function BoardgameDetails() {
   return (
     <div className={classes.root}>
       <h2>Game Details</h2>
+      <BackButton destination="/boardgame"/>
       <div>
         <Grid 
             container 

@@ -51,6 +51,7 @@ function BoardgameList() {
   return (
     <div>
       <h2>Boardgame List</h2>
+      <BackButton destination="/user" />
       <Grid 
         container
         spacing={1}
@@ -58,9 +59,6 @@ function BoardgameList() {
         justifyContent="center"
         alignItems="flex-start"
       >
-            <Grid item xs={12}>
-              <BackButton destination="/user" />
-            </Grid>
         {games.map((game, index) => {
           return (
             <Grid item key={index}>
