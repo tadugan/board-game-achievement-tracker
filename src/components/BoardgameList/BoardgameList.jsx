@@ -52,7 +52,7 @@ function BoardgameList() {
       <h2>Boardgame List</h2>
       <Grid 
         container
-        spacing={10}
+        spacing={1}
         direction="row"
         justifyContent="center"
         alignItems="flex-start"
@@ -77,14 +77,6 @@ function BoardgameList() {
                       </Typography>
                     </CardContent>
                   </CardActionArea>
-                  {/* <CardActions>
-                    <Button size="small" color="primary">
-                      View
-                    </Button>
-                    <Button size="small" color="primary">
-                      Add
-                    </Button>
-                  </CardActions> */}
                 </Card>
             </Grid>
           );
