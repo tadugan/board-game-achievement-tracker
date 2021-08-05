@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
     root: {
@@ -22,6 +23,8 @@ const useStyles = makeStyles({
 function BoardgameCard({ game }) {
   
   const classes = useStyles();
+
+  const history = useHistory();
 
   const handleClick = (gameId) => {
     console.log('game id is:', gameId);
