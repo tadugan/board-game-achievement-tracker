@@ -13,6 +13,9 @@ const useStyles = makeStyles({
     position: 'fixed',
     bottom: 0,
   },
+  icon: {
+    fontSize: '2.5rem',
+  },
 });
 
 import './Footer.css';
@@ -31,26 +34,23 @@ function Footer() {
   return (
     <footer className={classes.root}>
       <BottomNavigation
-        // value={value}
-        // onChange={(event, newValue) => {
-        //   setValue(newValue);
-        // }}
         showLabels
         className={classes.stickToBottom}
+        style={{ height: '80px'}}
       >
         <BottomNavigationAction 
           label="Profile" 
-          icon={<Person />}
+          icon={<Person className={classes.icon}/>}
           onClick={() => {handleClick('/user')}}
         />
         <BottomNavigationAction 
           label="Collection" 
-          icon={<Casino />} 
+          icon={<Casino className={classes.icon}/>}
           onClick={() => {handleClick('/user')}}
         />
         <BottomNavigationAction 
           label="Add Game" 
-          icon={<AddCircle />}
+          icon={<AddCircle className={classes.icon}/>}
           onClick={() => {handleClick('/boardgame')}} 
         />
       </BottomNavigation>
