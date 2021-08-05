@@ -38,10 +38,12 @@ function BoardgameDetails() {
   const boardgameAchievements = useSelector(store => store.gameAchievements);
 
   const getBoardgameDetails = (gameId) => {
-    console.log('gameId is:', gameId); // test
-
     dispatch({ type: 'GET_GAME_DETAILS', payload: { id: gameId }});
     dispatch({ type: 'GET_GAME_ACHIEVEMENTS', payload: { id: gameId }});
+  }
+
+  const addToCollection = (gameId) => {
+    dispatch({ type: 'ADD_TO_COLLECTION', payload: { id: gameId }})
   }
 
   useEffect(() => {
@@ -89,6 +91,7 @@ function BoardgameDetails() {
                 <Button
                     variant="contained"
                     color="secondary"
+                    onClick={() => addToCollection(params.id)}
                 >
                     Add To Collection
                 </Button>
