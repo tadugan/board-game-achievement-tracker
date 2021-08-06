@@ -32,7 +32,7 @@ router.get('/profile', rejectUnauthenticated, (req, res) => {
 });
 
 /**
- * GET details for one boardgame
+ * GET
  * /achievement/:id returns the achievements for one boardgame
  */
  router.get('/:id', (req, res) => {
@@ -57,10 +57,52 @@ router.get('/profile', rejectUnauthenticated, (req, res) => {
 });
 
 /**
- * POST route template
+ * GET
+ * /achievement/:id returns the user's achievements for one boardgame
  */
-router.post('/', (req, res) => {
-  // POST route code here
+ router.get('/user/:id', rejectUnauthenticated, (req, res) => {
+    const gameId = req.params.id;
+    const user = req.user.id;
+    
+    let queryText = `
+    SELECT achievement.id, user_achievement_list.completed, user_achievement_list.date_completed, achievement.title, achievement.requirement, achievement.difficulty, achievement.boardgame_id
+    FROM user_achievement_list
+    JOIN achievement ON user_achievement_list.achievement_id = achievement.id
+    WHERE user_id = $1 AND achievement.boardgame_id = $2;
+    `;
+  
+    pool.query(queryText, [user, gameId])
+      .then(response => {
+          res.send(response.rows);
+      })
+      .catch(error => {
+          console.log('Error getting user achievements for one game. Error:', error);
+          res.sendStatus(500);
+      });
+  });
+
+
+/**
+ * POST
+ * Mark a single achievement as complete
+ */
+router.post('/user/complete/:id', rejectUnauthenticated, (req, res) => {
+  const achievementId = req.params.id;
+  const user = req.user.id;
+
+  let queryText = `
+  UPDATE user_achievement_list
+  SET completed = true
+  WHERE user_id = $1 AND achievement_id = $2;
+  `;
+
+  pool.query(queryText, [user, achievementId])
+    .then(response => {
+        res.sendStatus(204);
+    })
+    .catch(error => {
+        res.sendStatus(500);
+    })
 });
 
 module.exports = router;

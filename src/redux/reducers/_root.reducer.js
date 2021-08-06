@@ -5,6 +5,7 @@ import profileAchievement from './profile_achievement.reducer';
 import boardgames from './boardgame.reducer';
 import gameDetails from './details.reducer';
 import gameAchievements from './achievement_details.reducer';
+import userAchievements from './user_achievement.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   profileAchievement, // contains a list of recently completed achievements for the user profile
   boardgames, // contains all supported board games to display in the BoardgameList
   gameDetails, // contains details for 1 game being viewed
-  gameAchievements, // // contains achievements for 1 game being viewed
+  gameAchievements, // contains achievements for 1 game being viewed
+  userAchievements, // contains all of a users achievements for 1 game
 });
 
 export default rootReducer;
