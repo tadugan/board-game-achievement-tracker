@@ -32,7 +32,7 @@ router.get('/profile', rejectUnauthenticated, (req, res) => {
 });
 
 /**
- * GET details for one boardgame
+ * GET
  * /achievement/:id returns the achievements for one boardgame
  */
  router.get('/:id', (req, res) => {
@@ -55,6 +55,32 @@ router.get('/profile', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
     });
 });
+
+/**
+ * GET
+ * /achievement/:id returns the user's achievements for one boardgame
+ */
+ router.get('/user/:id', rejectUnauthenticated, (req, res) => {
+    const gameId = req.params.id;
+    const user = req.user.id;
+    
+    let queryText = `
+    SELECT achievement.id, user_achievement_list.completed, user_achievement_list.date_completed, achievement.title, achievement.requirement, achievement.difficulty
+    FROM user_achievement_list
+    JOIN achievement ON user_achievement_list.achievement_id = achievement.id
+    WHERE user_id = $1 AND achievement.boardgame_id = $2;
+    `;
+  
+    pool.query(queryText, [user, gameId])
+      .then(response => {
+          res.send(response.rows);
+      })
+      .catch(error => {
+          console.log('Error getting user achievements for one game. Error:', error);
+          res.sendStatus(500);
+      });
+  });
+
 
 /**
  * POST route template
