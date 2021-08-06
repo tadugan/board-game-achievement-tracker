@@ -3,7 +3,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Button, Grid, makeStyles } from '@material-ui/core';
-import { CheckBoxOutlined } from '@material-ui/icons';
+import { CheckBoxOutlined, InsertEmoticon } from '@material-ui/icons';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles({
     requirement: {
@@ -19,11 +20,27 @@ const useStyles = makeStyles({
     checkbox: {
         fontSize: '2.5rem'
     },
+    emoticon: {
+      fontSize: '2.5rem'
+  },
   });
 
 function AchievementCard({ achievement, displayCollection }) {
 
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+
+  const completeAchievement = (achievementId, boardgameId) => {
+    console.log('achievementId is:', achievementId); // test
+
+    dispatch({ type: 'MARK_ACHIEVEMENT_COMPLETE', payload: 
+      {
+        achievementId,
+        boardgameId
+      } 
+    });
+  }
 
   const conditionalStatus = () => {
     if (achievement.completed === true) {
@@ -46,17 +63,24 @@ function AchievementCard({ achievement, displayCollection }) {
   }
 
   const conditionalCheckbox = () => {
-    if (displayCollection) {
+    if (achievement.completed === false && displayCollection) {
         return (
           <Grid item xs={4}>
-            <Button> 
+            <Button 
+              variant="contained"
+              onClick={() => completeAchievement(achievement.id, achievement.boardgame_id)}
+            > 
               <CheckBoxOutlined className={classes.checkbox}/>
             </Button>
           </Grid>
         );
     }
     else {
-        return;
+        return (
+          <Grid item xs={4}>
+            <InsertEmoticon className={classes.emoticon}/>
+          </Grid>
+        );
     }
   }
 
