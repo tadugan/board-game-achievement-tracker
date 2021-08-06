@@ -1,29 +1,42 @@
 import { Grid } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import BackButton from '../BackButton/BackButton';
 import BoardgameCard from '../BoardgameCard/BoardgameCard';
 
 
-function BoardgameList() {
+function BoardgameList( {displayCollection} ) {
 
   const dispatch = useDispatch();
   const games = useSelector(store => store.boardgames);
+  const [ pageHeader, setPageHeader ] = useState('Boardgames');
 
   const getAllBoardgames = () => {
-      console.log('GETting all boardgames to display'); // test
-
       dispatch({ type: 'GET_ALL_BOARDGAMES' });
   }
 
-  useEffect(() => {
+  const getUserCollection = () => {
+      dispatch({ type: 'GET_USER_COLLECTION' });
+  }
+
+  const displayGames = () => {
+    if (displayCollection === 'true') {
+      getUserCollection();
+      setPageHeader('My Collection');
+    }
+    else {
       getAllBoardgames();
+    }
+  }
+
+  useEffect(() => {
+      displayGames();
   }, []);
 
   return (
     <div>
-      <h2>Boardgame List</h2>
+      <h2>{pageHeader}</h2>
       <BackButton destination="/user" />
       <Grid 
         container
