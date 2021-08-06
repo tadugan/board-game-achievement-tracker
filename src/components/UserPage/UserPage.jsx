@@ -81,7 +81,7 @@ function UserPage() {
         <Grid item xs={12}>
           <Button
             type="button"
-            onClick={() => handleClick('/boardgame')}
+            onClick={() => handleClick('/collection')}
             variant="contained"
             className={classes.button}
           >

@@ -21,7 +21,7 @@ function BoardgameList( {displayCollection} ) {
   }
 
   const displayGames = () => {
-    if (displayCollection === 'true') {
+    if (displayCollection) {
       getUserCollection();
       setPageHeader('My Collection');
     }
@@ -48,7 +48,7 @@ function BoardgameList( {displayCollection} ) {
         {games.map((game, index) => {
           return (
             <Grid item key={index}>
-                <BoardgameCard game={game}/>
+                <BoardgameCard game={game} displayCollection={displayCollection} />
             </Grid>
           );
         })}
