@@ -200,13 +200,6 @@ function BoardgameDetails({ displayCollection }) {
                 <h3>Achievements:</h3>
             </Grid>
             {contextualAchievements()}
-                {/* {boardgameAchievements.map((achievement, index) => {
-                    return (
-                        <Grid item xs={10} key={index}>
-                            <AchievementCard achievement={achievement} displayCollection={displayCollection} />
-                        </Grid>
-                    );
-                })} */}
         </Grid>
       </div>
     </div>

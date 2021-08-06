@@ -21,9 +21,44 @@ const useStyles = makeStyles({
     },
   });
 
-function AchievementCard({ achievement }) {
+function AchievementCard({ achievement, displayCollection }) {
 
   const classes = useStyles();
+
+  const conditionalStatus = () => {
+    if (achievement.completed === true) {
+        return (
+          <Grid item>
+            <p className={classes.status}>Completed</p>
+          </Grid>
+        );
+    }
+    else if (displayCollection) {
+        return (
+          <Grid item>
+            <p className={classes.status}>Incomplete</p>
+          </Grid>
+        );
+    }
+    else {
+      return;
+    }
+  }
+
+  const conditionalCheckbox = () => {
+    if (displayCollection) {
+        return (
+          <Grid item xs={4}>
+            <Button> 
+              <CheckBoxOutlined className={classes.checkbox}/>
+            </Button>
+          </Grid>
+        );
+    }
+    else {
+        return;
+    }
+  }
 
   return (
     <Card className={classes.card}>
@@ -45,15 +80,9 @@ function AchievementCard({ achievement }) {
                   <h4>{achievement.title}</h4>
                   <p className={classes.requirement}>{achievement.requirement}</p>
             </Grid>
-            <Grid item>
-              <p className={classes.status}>STATUS</p>
-            </Grid>
+            {conditionalStatus()}
           </Grid>
-          <Grid item xs={4}>
-            <Button> 
-              <CheckBoxOutlined className={classes.checkbox}/>
-            </Button>
-          </Grid>
+          {conditionalCheckbox()}
       </Grid>
     </Card>
   );
