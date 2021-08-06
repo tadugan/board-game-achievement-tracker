@@ -32,10 +32,15 @@ function BoardgameDetails({ displayCollection }) {
 
   const boardgameDetails = useSelector(store => store.gameDetails);
   const boardgameAchievements = useSelector(store => store.gameAchievements);
+  const userAchievements = useSelector(store => store.userAchievements);
 
   const getBoardgameDetails = (gameId) => {
     dispatch({ type: 'GET_GAME_DETAILS', payload: { id: gameId }});
     dispatch({ type: 'GET_GAME_ACHIEVEMENTS', payload: { id: gameId }});
+  }
+
+  const getUserAchievements = (gameId) => {
+    dispatch({ type: 'GET_USER_ACHIEVEMENTS', payload: { id: gameId }})
   }
 
   const addToCollection = (gameId) => {
@@ -51,6 +56,31 @@ function BoardgameDetails({ displayCollection }) {
       console.log('gameId is:', gameId); // test
       console.log('This is where we would remove the game'); // test
       // TODO:
+  }
+
+  const contextualAchievements = () => {
+      if (displayCollection) {
+            return (
+                userAchievements.map((achievement, index) => {
+                return (
+                    <Grid item xs={10} key={index}>
+                        <AchievementCard achievement={achievement} displayCollection={displayCollection} />
+                    </Grid>
+                );
+            })
+            )
+      }
+      else {
+            return (
+                boardgameAchievements.map((achievement, index) => {
+                return (
+                    <Grid item xs={10} key={index}>
+                        <AchievementCard achievement={achievement} displayCollection={displayCollection} />
+                    </Grid>
+                );
+            })
+            )
+      }
   }
 
   const contextualButtons = () => {
@@ -127,6 +157,7 @@ function BoardgameDetails({ displayCollection }) {
 
   useEffect(() => {
     getBoardgameDetails(params.id);
+    getUserAchievements(params.id);
   }, []);
 
   return (
@@ -168,13 +199,14 @@ function BoardgameDetails({ displayCollection }) {
             <Grid item xs={10}>
                 <h3>Achievements:</h3>
             </Grid>
-                {boardgameAchievements.map((achievement, index) => {
+            {contextualAchievements()}
+                {/* {boardgameAchievements.map((achievement, index) => {
                     return (
                         <Grid item xs={10} key={index}>
                             <AchievementCard achievement={achievement} displayCollection={displayCollection} />
                         </Grid>
                     );
-                })}
+                })} */}
         </Grid>
       </div>
     </div>

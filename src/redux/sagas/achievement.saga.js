@@ -20,9 +20,20 @@ function* getGameAchievements(action) {
     }
 }
 
+function* getUserAchievements(action) {
+    const gameId = action.payload.id;
+    try {
+        const userAchievements = yield axios.get(`/achievement/user/${gameId}`);
+        yield put({ type: 'SET_USER_ACHIEVEMENTS', payload: userAchievements.data })
+    } catch (error) {
+        console.log('Error GETTING user achievements for one game. Error:', error);
+    }
+}
+
 function* achievementSaga() {
     yield takeLatest('GET_PROFILE_ACHIEVEMENTS', getProfileAchievements);
     yield takeLatest('GET_GAME_ACHIEVEMENTS', getGameAchievements);
+    yield takeLatest('GET_USER_ACHIEVEMENTS', getUserAchievements);
 }
 
 export default achievementSaga;
