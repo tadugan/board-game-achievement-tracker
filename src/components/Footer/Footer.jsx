@@ -46,7 +46,7 @@ function Footer() {
         <BottomNavigationAction 
           label="Collection" 
           icon={<Casino className={classes.icon}/>}
-          onClick={() => {handleClick('/user')}}
+          onClick={() => {handleClick('/collection')}}
         />
         <BottomNavigationAction 
           label="Add Game" 

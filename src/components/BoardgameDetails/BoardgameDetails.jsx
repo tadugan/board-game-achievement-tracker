@@ -2,23 +2,13 @@ import { Button, Grid, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import { useEffect } from 'react';
 import BackButton from '../BackButton/BackButton';
+import AchievementCard from '../AchievementCard/AchievementCard';
 
 const useStyles = makeStyles({
     root: {
       textAlign: "center",
-    },
-    card: {
-        minWidth: 275,
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
     },
     title: {
         fontSize: 14,
@@ -35,6 +25,7 @@ function BoardgameDetails() {
   const dispatch = useDispatch();
   const history = useHistory();
   const params = useParams();
+
   const boardgameDetails = useSelector(store => store.gameDetails);
   const boardgameAchievements = useSelector(store => store.gameAchievements);
 
@@ -119,26 +110,16 @@ function BoardgameDetails() {
                     Return to List
                 </Button>
             </Grid>
-            <Grid
-                item
-                xs={10}
-            >
+            <Grid item xs={10}>
                 <h3>Achievements:</h3>
+            </Grid>
                 {boardgameAchievements.map((achievement, index) => {
                     return (
-                        <Card className={classes.card} key={index}>
-                            <CardContent>
-                                <Typography variant="h5" component="h2">
-                                    {achievement.title}
-                                </Typography>
-                                <Typography variant="body2" component="p">
-                                    {achievement.requirement}
-                                </Typography>
-                            </CardContent>
-                        </Card>
+                        <Grid item xs={10} key={index}>
+                            <AchievementCard achievement={achievement}/>
+                        </Grid>
                     );
                 })}
-            </Grid>
         </Grid>
       </div>
     </div>

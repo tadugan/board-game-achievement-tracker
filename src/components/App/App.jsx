@@ -83,10 +83,20 @@ function App() {
 
           <ProtectedRoute
             // logged in shows BoardgameList else shows LoginPage
+            // displayCollection set to false will display all supported games
             exact
             path="/boardgame"
           >
-            <BoardgameList />
+            <BoardgameList displayCollection="false"/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows BoardgameList else shows LoginPage
+            // displayCollection set to true will display the user's collection only
+            exact
+            path="/collection"
+          >
+            <BoardgameList displayCollection="true"/>
           </ProtectedRoute>
 
           <ProtectedRoute

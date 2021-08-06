@@ -6,14 +6,34 @@ const {
   } = require('../modules/authentication-middleware');
 
 /**
- * GET route template
+ * GET
+ * Returns all games in a user's collection
  */
-router.get('/', (req, res) => {
-  // GET route code here
+router.get('/', rejectUnauthenticated, (req, res) => {
+  
+  const user = req.user.id;
+
+  const queryText = `
+  SELECT boardgame.id, boardgame.publisher, boardgame.description, boardgame.image_url, boardgame.id
+  FROM user_boardgame_list
+  JOIN boardgame ON user_boardgame_list.boardgame_id = boardgame.id
+  WHERE user_id = $1
+  ORDER BY boardgame."name" ASC;
+  `;
+
+  pool.query(queryText, [user])
+    .then(response => {
+      res.send(response.rows);
+    })
+    .catch(error => {
+      console.log('Error retrieving user collection. Error:', error);
+      res.sendStatus(500);
+    })
+
 });
 
 /**
- * POST route template
+ * POST
  * Add a game and all of it's achievements to the user's collection
  */
 router.post('/', rejectUnauthenticated, (req, res) => {

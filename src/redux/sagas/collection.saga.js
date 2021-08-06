@@ -9,9 +9,18 @@ function* addToCollection(action) {
     }
 }
 
+function* getUserCollection() {
+    try {
+        const myCollection = yield axios.get('/collection');
+        yield put({ type: 'SET_ALL_BOARDGAMES', payload: myCollection.data })
+    } catch (error) {
+        console.log('Error getting user collection. Error:', error);
+    }
+}
 
 function* collectionSaga() {
     yield takeLatest('ADD_TO_COLLECTION', addToCollection);
+    yield takeLatest('GET_USER_COLLECTION', getUserCollection);
 }
 
 export default collectionSaga;
