@@ -16,6 +16,10 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 12,
     },
+    button: {
+        margin: "8px 0 8px 0",
+        width: "250px",
+    },
   });
 
 function BoardgameDetails({ displayCollection }) {
@@ -58,6 +62,7 @@ function BoardgameDetails({ displayCollection }) {
                         variant="contained"
                         color="secondary"
                         onClick={() => removeFromCollection(params.id)}
+                        className={classes.button}
                     >
                         Remove from Collection
                     </Button>
@@ -67,6 +72,7 @@ function BoardgameDetails({ displayCollection }) {
                         variant="contained"
                         color="primary"
                         onClick={() => routeUser('/collection')}
+                        className={classes.button}
                     >
                         Return to Collection
                     </Button>
@@ -82,6 +88,7 @@ function BoardgameDetails({ displayCollection }) {
                         variant="contained"
                         color="secondary"
                         onClick={() => addToCollection(params.id)}
+                        className={classes.button}
                     >
                         Add To Collection
                     </Button>
@@ -91,6 +98,7 @@ function BoardgameDetails({ displayCollection }) {
                         variant="contained"
                         color="primary"
                         onClick={() => routeUser('/boardgame')}
+                        className={classes.button}
                     >
                         Return to List
                     </Button>
@@ -117,13 +125,8 @@ function BoardgameDetails({ displayCollection }) {
     history.push(destination);
   }
 
-  const testLogProps = () => {
-    console.log('displayCollection is:', displayCollection); // test
-  }
-
   useEffect(() => {
     getBoardgameDetails(params.id);
-    testLogProps();
   }, []);
 
   return (
