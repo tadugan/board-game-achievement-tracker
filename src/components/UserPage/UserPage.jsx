@@ -3,9 +3,27 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import {useDispatch, useSelector} from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
+import AchievementCard from '../AchievementCard/AchievementCard';
+import { Grid, makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles({
+  root: {
+    textAlign: "center",
+  },
+  achievement: {
+    maxWidth: "352px",
+    margin: "16px"
+  },
+  button: {
+    margin: "16px",
+    width: "200px",
+  },
+});
 
 function UserPage() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
+
+  const classes = useStyles();
+
   const user = useSelector((store) => store.user);
   const achievements = useSelector(store => store.profileAchievement);
 
@@ -32,55 +50,68 @@ function UserPage() {
   }, []);
 
   return (
-    <div className="container">
-      <img src={user.profile_image_url} height="100px" />
-      <br />
-      <h3>{user.first_name} {user.last_name}</h3>
-      <h4>Current Favorite Game: {user.current_favorite_game}</h4>
-      <h5>Recent Achievements</h5>
-      <table>
-        <thead>
-          <tr>
-            <th>Game</th>
-            <th>Achievement</th>
-          </tr>
-        </thead>
-        <tbody>
-          {achievements.map((achievement, index) => {
-            return (
-              <tr key={index}>
-                <td>{achievement.name}</td>
-                <td>{achievement.title}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <Button 
-        type="button"
-        onClick={() => handleClick('/boardgame')}
-        variant="contained"
+    <div className={classes.root}>
+      <h2>Profile</h2>
+      <Grid 
+        container 
+        spacing={0}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
       >
-        View Collection
-      </Button>
-      <br />
-      <Button 
-        type="button"
-        onClick={() => handleClick('/boardgame')}
-        variant="contained"
-      >
-        Add New Game
-      </Button>
-      <br />
-      <Button 
-        type="button"
-        onClick={() => handleClick('/admin')}
-        variant="contained"
-      >
-        Admin
-      </Button>
-      <br />
-      <LogOutButton className="btn" />
+        <Grid item xs={12}>
+          <img src={user.profile_image_url} height="100px" width="100px"/>
+        </Grid>
+        <Grid item xs={12}>
+          <h3>{user.first_name} {user.last_name}</h3>
+        </Grid>
+        <Grid item xs={12}>
+          <h4>Current Favorite Game: {user.current_favorite_game}</h4>
+        </Grid>
+        <Grid item xs={12}>
+          <h5>Recent Achievements</h5>
+        </Grid>
+        {achievements.map((achievement, index) => {
+              return (
+                  <Grid item xs={12} md={12} key={index} className={classes.achievement}>
+                    <AchievementCard achievement={achievement}/>
+                  </Grid>
+              );
+        })}
+        <Grid item xs={12}>
+          <Button
+            type="button"
+            onClick={() => handleClick('/boardgame')}
+            variant="contained"
+            className={classes.button}
+          >
+            View Collection
+          </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            type="button"
+            onClick={() => handleClick('/boardgame')}
+            variant="contained"
+            className={classes.button}
+          >
+            Add New Game
+          </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            type="button"
+            onClick={() => handleClick('/admin')}
+            variant="contained"
+            className={classes.button}
+          >
+            Admin
+          </Button>
+        </Grid>
+        <Grid item xs={7}>
+          <LogOutButton className="btn" />
+        </Grid>
+      </Grid>
     </div>
   );
 }
