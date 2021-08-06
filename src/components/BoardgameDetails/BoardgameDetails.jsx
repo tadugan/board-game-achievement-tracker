@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     },
   });
 
-function BoardgameDetails() {
+function BoardgameDetails({ displayCollection }) {
 
   const classes = useStyles();
 
@@ -43,6 +43,75 @@ function BoardgameDetails() {
     })
   }
 
+  const removeFromCollection = (gameId) => {
+      console.log('gameId is:', gameId); // test
+      console.log('This is where we would remove the game'); // test
+  }
+
+  const contextualButtons = () => {
+      if (displayCollection === "true") {
+          return (
+            <>
+                <Grid item xs={12}>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => removeFromCollection(params.id)}
+                    >
+                        Remove from Collection
+                    </Button>
+                </Grid>
+                <Grid item xs={12}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => routeUser('/collection')}
+                    >
+                        Return to Collection
+                    </Button>
+                </Grid>
+            </>
+          );
+      }
+      else {
+          return (
+            <>
+                <Grid item xs={12}>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => addToCollection(params.id)}
+                    >
+                        Add To Collection
+                    </Button>
+                </Grid>
+                <Grid item xs={12}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => routeUser('/boardgame')}
+                    >
+                        Return to List
+                    </Button>
+                </Grid>
+            </>
+          );
+      }
+  }
+
+  const contextualBackButton = () => {
+      if (displayCollection === "true") {
+        return (
+            <BackButton destination="/collection"/>
+        );
+      }
+      else {
+        return (
+            <BackButton destination="/boardgame"/>
+        );
+      }
+  }
+
   const routeUser = (destination) => {
     history.push(destination);
   }
@@ -54,7 +123,7 @@ function BoardgameDetails() {
   return (
     <div className={classes.root}>
       <h2>Game Details</h2>
-      <BackButton destination="/boardgame"/>
+      {contextualBackButton()}
       <div>
         <Grid 
             container 
@@ -86,30 +155,7 @@ function BoardgameDetails() {
             >
                 <h3>{boardgameDetails.name}</h3>
             </Grid>
-            <Grid
-                item
-                xs={12}
-            >
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => addToCollection(params.id)}
-                >
-                    Add To Collection
-                </Button>
-            </Grid>
-            <Grid
-                item
-                xs={12}
-            >
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => routeUser('/boardgame')}
-                >
-                    Return to List
-                </Button>
-            </Grid>
+            {contextualButtons()}
             <Grid item xs={10}>
                 <h3>Achievements:</h3>
             </Grid>

@@ -20,16 +20,19 @@ const useStyles = makeStyles({
     },
 });
 
-function BoardgameCard({ game }) {
+function BoardgameCard({ game, displayCollection }) {
   
   const classes = useStyles();
 
   const history = useHistory();
 
   const handleClick = (gameId) => {
-    console.log('game id is:', gameId);
-
-    history.push(`/boardgame/${gameId}`);
+    if (displayCollection === "true") {
+        history.push(`/collection/${gameId}`);
+    }
+    else {
+        history.push(`/boardgame/${gameId}`);
+    }
   }
 
   return (

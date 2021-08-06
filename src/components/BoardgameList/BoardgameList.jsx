@@ -48,7 +48,7 @@ function BoardgameList( {displayCollection} ) {
         {games.map((game, index) => {
           return (
             <Grid item key={index}>
-                <BoardgameCard game={game}/>
+                <BoardgameCard game={game} displayCollection={displayCollection} />
             </Grid>
           );
         })}
