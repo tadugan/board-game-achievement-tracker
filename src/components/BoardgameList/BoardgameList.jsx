@@ -21,7 +21,7 @@ function BoardgameList( {displayCollection} ) {
   }
 
   const displayGames = () => {
-    if (displayCollection === 'true') {
+    if (displayCollection) {
       getUserCollection();
       setPageHeader('My Collection');
     }

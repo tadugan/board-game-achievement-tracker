@@ -27,7 +27,7 @@ function BoardgameCard({ game, displayCollection }) {
   const history = useHistory();
 
   const handleClick = (gameId) => {
-    if (displayCollection === "true") {
+    if (displayCollection) {
         history.push(`/collection/${gameId}`);
     }
     else {

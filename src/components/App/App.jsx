@@ -87,7 +87,7 @@ function App() {
             exact
             path="/boardgame"
           >
-            <BoardgameList displayCollection="false" />
+            <BoardgameList displayCollection={false} />
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -96,7 +96,7 @@ function App() {
             exact
             path="/collection"
           >
-            <BoardgameList displayCollection="true" />
+            <BoardgameList displayCollection={true} />
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -105,7 +105,7 @@ function App() {
             exact
             path="/boardgame/:id"
           >
-            <BoardgameDetails displayCollection="false" />
+            <BoardgameDetails displayCollection={false} />
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -114,7 +114,7 @@ function App() {
             exact
             path="/collection/:id"
           >
-            <BoardgameDetails displayCollection="true" />
+            <BoardgameDetails displayCollection={true} />
           </ProtectedRoute>
 
           <ProtectedRoute

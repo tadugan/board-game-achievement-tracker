@@ -46,10 +46,11 @@ function BoardgameDetails({ displayCollection }) {
   const removeFromCollection = (gameId) => {
       console.log('gameId is:', gameId); // test
       console.log('This is where we would remove the game'); // test
+      // TODO:
   }
 
   const contextualButtons = () => {
-      if (displayCollection === "true") {
+      if (displayCollection) {
           return (
             <>
                 <Grid item xs={12}>
@@ -100,7 +101,7 @@ function BoardgameDetails({ displayCollection }) {
   }
 
   const contextualBackButton = () => {
-      if (displayCollection === "true") {
+      if (displayCollection) {
         return (
             <BackButton destination="/collection"/>
         );
@@ -116,8 +117,13 @@ function BoardgameDetails({ displayCollection }) {
     history.push(destination);
   }
 
+  const testLogProps = () => {
+    console.log('displayCollection is:', displayCollection); // test
+  }
+
   useEffect(() => {
     getBoardgameDetails(params.id);
+    testLogProps();
   }, []);
 
   return (
@@ -162,7 +168,7 @@ function BoardgameDetails({ displayCollection }) {
                 {boardgameAchievements.map((achievement, index) => {
                     return (
                         <Grid item xs={10} key={index}>
-                            <AchievementCard achievement={achievement}/>
+                            <AchievementCard achievement={achievement} displayCollection={displayCollection} />
                         </Grid>
                     );
                 })}
