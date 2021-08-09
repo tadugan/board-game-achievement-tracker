@@ -33,6 +33,9 @@ function BoardgameDetails({ displayCollection }) {
   const boardgameDetails = useSelector(store => store.gameDetails);
   const boardgameAchievements = useSelector(store => store.gameAchievements);
   const userAchievements = useSelector(store => store.userAchievements);
+  const userCollection = useSelector(store => store.boardgames);
+
+  const [ displayMode, setDisplayMode ] = useState(displayCollection);
 
   const getBoardgameDetails = (gameId) => {
     dispatch({ type: 'GET_GAME_DETAILS', payload: { id: gameId }});
@@ -66,12 +69,12 @@ function BoardgameDetails({ displayCollection }) {
   }
 
   const contextualAchievements = () => {
-      if (displayCollection) {
+      if (displayMode) {
             return (
                 userAchievements.map((achievement, index) => {
                 return (
                     <Grid item xs={10} key={index}>
-                        <AchievementCard achievement={achievement} displayCollection={displayCollection} />
+                        <AchievementCard achievement={achievement} displayCollection={displayMode} />
                     </Grid>
                 );
             })
@@ -82,7 +85,7 @@ function BoardgameDetails({ displayCollection }) {
                 boardgameAchievements.map((achievement, index) => {
                 return (
                     <Grid item xs={10} key={index}>
-                        <AchievementCard achievement={achievement} displayCollection={displayCollection} />
+                        <AchievementCard achievement={achievement} displayCollection={displayMode} />
                     </Grid>
                 );
             })
@@ -91,7 +94,7 @@ function BoardgameDetails({ displayCollection }) {
   }
 
   const contextualButtons = () => {
-      if (displayCollection) {
+      if (displayMode) {
           return (
             <>
                 <Grid item xs={12}>
@@ -146,7 +149,7 @@ function BoardgameDetails({ displayCollection }) {
   }
 
   const contextualBackButton = () => {
-      if (displayCollection) {
+      if (displayMode) {
         return (
             <BackButton destination="/collection"/>
         );

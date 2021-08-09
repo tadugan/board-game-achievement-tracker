@@ -64,6 +64,9 @@ router.get('/profile', rejectUnauthenticated, (req, res) => {
     const gameId = req.params.id;
     const user = req.user.id;
     
+    console.log('in router. gameId:', gameId); // test
+    console.log('in router. user:', user); // test
+
     let queryText = `
     SELECT achievement.id, user_achievement_list.completed, user_achievement_list.date_completed, achievement.title, achievement.requirement, achievement.difficulty, achievement.boardgame_id
     FROM user_achievement_list

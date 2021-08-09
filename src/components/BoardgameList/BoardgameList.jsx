@@ -30,13 +30,9 @@ function BoardgameList( {displayCollection} ) {
     }
   }
 
-  const isThisOccuring = () => { // test
-    console.log('This is occuring');
-  }
 
   useEffect(() => {
       displayGames();
-      isThisOccuring();
   }, []);
 
   return (

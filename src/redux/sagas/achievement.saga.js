@@ -33,7 +33,6 @@ function* getUserAchievements(action) {
 function* markAchievementComplete(action) {
     const achievementId = action.payload.achievementId;
     const gameId = action.payload.boardgameId;
-    console.log('PROBLEM:', action.payload);
     try {
         yield axios.post(`/achievement/user/complete/${achievementId}`);
         yield put({ type: 'GET_USER_ACHIEVEMENTS', payload: { id: gameId }});
