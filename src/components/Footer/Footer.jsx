@@ -61,7 +61,6 @@ function Footer() {
         );
     }
     else {
-        console.log('this is user', user); // test
         return;
     }
   }

@@ -100,7 +100,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows BoardgameList else shows LoginPage
+            // logged in shows BoardgameDetails else shows LoginPage
             // displayCollection set to false will display general details for a game
             exact
             path="/boardgame/:id"
@@ -109,7 +109,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows BoardgameList else shows LoginPage
+            // logged in shows BoardgameDetails else shows LoginPage
             // displayCollection set to true will display user details for a game
             exact
             path="/collection/:id"
