@@ -51,21 +51,19 @@ function BoardgameDetails({ displayCollection }) {
     dispatch({ type: 'ADD_TO_COLLECTION', payload: 
         { 
             id: gameId,
-            achievements: boardgameAchievements
+            achievements: boardgameAchievements,
+            history: history
         }
     });
-
-    getUserAchievements(gameId);
-
-    // send the user to their collection view of the game
-    history.push(`/collection/${gameId}`);
   }
 
   const removeFromCollection = (gameId) => {
-    dispatch({ type: 'REMOVE_FROM_COLLECTION', payload: gameId });
-
-    // send the user back to BoardgameList My Collection view
-    history.push('/collection');
+    dispatch({ type: 'REMOVE_FROM_COLLECTION', payload:
+        {
+            id: gameId,
+            history: history
+        } 
+    });
   }
 
   const contextualAchievements = () => {

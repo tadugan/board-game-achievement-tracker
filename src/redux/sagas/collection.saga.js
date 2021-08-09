@@ -7,7 +7,9 @@ function* addToCollection(action) {
     try {
         yield axios.post('/collection', action.payload);
         yield put({ type: 'GET_USER_COLLECTION' });
-        yield put ({ type: 'GET_USER_ACHIEVEMENTS', payload: gameId });
+        yield put({ type: 'GET_USER_ACHIEVEMENTS', payload: gameId });
+        console.log('this is action.payload:', action.payload);
+        action.payload.history.push(`/collection/${gameId.id}`);
     } catch (error) {
         console.log('Error adding game to collection. Error:', error);
     }
@@ -25,8 +27,9 @@ function* getUserCollection() {
 function* removeFromCollection(action) {
     const gameId = action.payload;
     try {
-        yield axios.delete(`/collection/${gameId}`);
+        yield axios.delete(`/collection/${gameId.id}`);
         yield put({ type: 'GET_USER_COLLECTION' });
+        action.payload.history.push('/collection');
     } catch (error) {
         console.log('Error removing game from user collection. Error:', error);
     }
