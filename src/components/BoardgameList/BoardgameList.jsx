@@ -12,6 +12,8 @@ function BoardgameList( {displayCollection} ) {
   const games = useSelector(store => store.boardgames);
   const [ pageHeader, setPageHeader ] = useState('Boardgames');
 
+  const [ displayMode, setDisplayMode ] = useState(displayCollection);
+
   const getAllBoardgames = () => {
       dispatch({ type: 'GET_ALL_BOARDGAMES' });
   }
@@ -30,13 +32,9 @@ function BoardgameList( {displayCollection} ) {
     }
   }
 
-  const isThisOccuring = () => { // test
-    console.log('This is occuring');
-  }
 
   useEffect(() => {
       displayGames();
-      isThisOccuring();
   }, []);
 
   return (

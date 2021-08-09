@@ -55,19 +55,22 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   pool.query(queryTextAddGame, [user, gameId])
     .then(response => {
         // If the game was added, add all associated achievements
-        for (let achievement of achievements) {
-            pool.query(queryTextAddAchievements, [user, achievement.id, gameId])
+        for (i=0; i<achievements.length; i++) {
+            pool.query(queryTextAddAchievements, [user, achievements[i].id, gameId])
                 .then(response => {
-                    res.sendStatus(201);
+                    if ( i > achievements.length) {
+                      console.log('SENDING STATUS'); 
+                      res.sendStatus(201);
+                    }
+                    else {
+                      console.log(`sending request ${i} of ${achievements.length}`); // test
+                    }
                 })
                 .catch(error => {
                     console.log('Error adding achievements to Database. Error', error);
                     res.sendStatus(500);
                 })
         }
-
-        // send 200 OK
-        res.sendStatus(201);
     })
     .catch(error => {
         console.log('Error adding game to collection. Error:', error);
@@ -107,7 +110,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             console.log('Error deleting achievements from user collection. Error:', error);
             res.sendStatus(500);
           });
-        res.sendStatus(204);
       })
       .catch(error => {
         console.log('Error deleting game from user collection. Error:', error);
