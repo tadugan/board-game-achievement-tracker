@@ -55,15 +55,13 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   pool.query(queryTextAddGame, [user, gameId])
     .then(response => {
         // If the game was added, add all associated achievements
-        for (i=0; i<achievements.length; i++) {
+        for (const i in achievements) {
             pool.query(queryTextAddAchievements, [user, achievements[i].id, gameId])
                 .then(response => {
-                    if ( i > achievements.length) {
+                    console.log(`sending request ${Number(i) + 1} of ${achievements.length}`); // test
+                    if ( Number(i)+1 === achievements.length) {
                       console.log('SENDING STATUS'); 
                       res.sendStatus(201);
-                    }
-                    else {
-                      console.log(`sending request ${i} of ${achievements.length}`); // test
                     }
                 })
                 .catch(error => {
