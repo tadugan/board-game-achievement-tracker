@@ -8,7 +8,6 @@ function* addToCollection(action) {
         yield axios.post('/collection', action.payload);
         yield put({ type: 'GET_USER_COLLECTION' });
         yield put({ type: 'GET_USER_ACHIEVEMENTS', payload: gameId });
-        console.log('this is action.payload:', action.payload);
         action.payload.history.push(`/collection/${gameId.id}`);
     } catch (error) {
         console.log('Error adding game to collection. Error:', error);
@@ -18,7 +17,8 @@ function* addToCollection(action) {
 function* getUserCollection() {
     try {
         const myCollection = yield axios.get('/collection');
-        yield put({ type: 'SET_ALL_BOARDGAMES', payload: myCollection.data })
+        yield put({ type: 'SET_ALL_BOARDGAMES', payload: myCollection.data });
+        yield put({ type: 'SET_USER_COLLECTION', payload: myCollection.data });
     } catch (error) {
         console.log('Error getting user collection. Error:', error);
     }

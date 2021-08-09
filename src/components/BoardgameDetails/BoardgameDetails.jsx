@@ -33,9 +33,10 @@ function BoardgameDetails({ displayCollection }) {
   const boardgameDetails = useSelector(store => store.gameDetails);
   const boardgameAchievements = useSelector(store => store.gameAchievements);
   const userAchievements = useSelector(store => store.userAchievements);
-  const userCollection = useSelector(store => store.boardgames);
+  const userCollection = useSelector(store => store.userCollection);
 
   const [ displayMode, setDisplayMode ] = useState(displayCollection);
+  const [ disableAddGame, setDisableAddGame ] = useState(false);
 
   const getBoardgameDetails = (gameId) => {
     dispatch({ type: 'GET_GAME_DETAILS', payload: { id: gameId }});
@@ -66,7 +67,21 @@ function BoardgameDetails({ displayCollection }) {
     });
   }
 
-  const contextualAchievements = () => {
+  const viewInCollection = (gameId) => {
+      history.push(`/collection/${gameId}`);
+  }
+
+  const checkCollection = (gameId) => {
+      console.log('CHECKING COLLECTION'); // test
+      for (let item of userCollection) {
+          if (item.id === Number(gameId)) {
+            //   history.push(`/collection/${gameId}`);
+            setDisableAddGame(true);
+          }
+      }
+  }
+
+  const conditionalAchievements = () => {
       if (displayMode) {
             return (
                 userAchievements.map((achievement, index) => {
@@ -91,7 +106,7 @@ function BoardgameDetails({ displayCollection }) {
       }
   }
 
-  const contextualButtons = () => {
+  const conditionalButtons = () => {
       if (displayMode) {
           return (
             <>
@@ -113,6 +128,32 @@ function BoardgameDetails({ displayCollection }) {
                         className={classes.button}
                     >
                         Return to Collection
+                    </Button>
+                </Grid>
+            </>
+          );
+      }
+      else if (disableAddGame) {
+        return (
+            <>
+                <Grid item xs={12}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => viewInCollection(params.id)}
+                        className={classes.button}
+                    >
+                        View in Collection
+                    </Button>
+                </Grid>
+                <Grid item xs={12}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => routeUser('/boardgame')}
+                        className={classes.button}
+                    >
+                        Return to List
                     </Button>
                 </Grid>
             </>
@@ -166,6 +207,7 @@ function BoardgameDetails({ displayCollection }) {
   useEffect(() => {
     getBoardgameDetails(params.id);
     getUserAchievements(params.id);
+    checkCollection(params.id);
   }, []);
 
   return (
@@ -203,11 +245,11 @@ function BoardgameDetails({ displayCollection }) {
             >
                 <h3>{boardgameDetails.name}</h3>
             </Grid>
-            {contextualButtons()}
+            {conditionalButtons()}
             <Grid item xs={10}>
                 <h3>Achievements:</h3>
             </Grid>
-            {contextualAchievements()}
+            {conditionalAchievements()}
         </Grid>
       </div>
     </div>
