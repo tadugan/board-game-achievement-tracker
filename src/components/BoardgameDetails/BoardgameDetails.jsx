@@ -44,18 +44,25 @@ function BoardgameDetails({ displayCollection }) {
   }
 
   const addToCollection = (gameId) => {
+    // add a game and all it's achievements to a user's collection
     dispatch({ type: 'ADD_TO_COLLECTION', payload: 
         { 
             id: gameId,
             achievements: boardgameAchievements
         }
-    })
+    });
+
+    getUserAchievements(gameId);
+
+    // send the user to their collection view of the game
+    history.push(`/collection/${gameId}`);
   }
 
   const removeFromCollection = (gameId) => {
-      console.log('gameId is:', gameId); // test
-      console.log('This is where we would remove the game'); // test
-      dispatch({ type: 'REMOVE_FROM_COLLECTION', payload: gameId });
+    dispatch({ type: 'REMOVE_FROM_COLLECTION', payload: gameId });
+
+    // send the user back to BoardgameList My Collection view
+    history.push('/collection');
   }
 
   const contextualAchievements = () => {
