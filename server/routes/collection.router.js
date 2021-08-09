@@ -47,8 +47,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   `;
 
   const queryTextAddAchievements = `
-  INSERT INTO user_achievement_list ("user_id", "achievement_id")
-  VALUES ($1, $2);
+  INSERT INTO user_achievement_list ("user_id", "achievement_id", "boardgame_id")
+  VALUES ($1, $2, $3);
   `;
 
   // Add a game to the user's collection
@@ -56,7 +56,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     .then(response => {
         // If the game was added, add all associated achievements
         for (let achievement of achievements) {
-            pool.query(queryTextAddAchievements, [user, achievement.id])
+            pool.query(queryTextAddAchievements, [user, achievement.id, gameId])
                 .then(response => {
                     res.sendStatus(201);
                 })
@@ -74,5 +74,46 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
     })
 });
+
+/**
+ * DELETE
+ * Remove a game and all of it's achievements from a user's collection
+ */
+ router.delete('/:id', rejectUnauthenticated, (req, res) => {
+    const gameId = req.params.id;
+    const user = req.user.id; 
+
+    const queryTextDeleteGame = `
+    DELETE
+    FROM user_boardgame_list
+    WHERE user_id = $1 AND boardgame_id = $2;
+    `;
+
+    const queryTextDeleteAchievements = `
+    DELETE
+    FROM user_achievement_list
+    WHERE user_id = $1 AND boardgame_id = $2;
+    `;
+
+    // DELETEs a game from a user's collection
+    pool.query(queryTextDeleteGame, [user, gameId])
+      .then(response => {
+        // DELETEs all achievements associated with that game that was deleted
+        pool.query(queryTextDeleteAchievements, [user, gameId])
+          .then(response => {
+            res.sendStatus(204);
+          })
+          .catch(error => {
+            console.log('Error deleting achievements from user collection. Error:', error);
+            res.sendStatus(500);
+          });
+        res.sendStatus(204);
+      })
+      .catch(error => {
+        console.log('Error deleting game from user collection. Error:', error);
+        res.sendStatus(500);
+      });
+});
+
 
 module.exports = router;

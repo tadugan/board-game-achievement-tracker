@@ -18,9 +18,19 @@ function* getUserCollection() {
     }
 }
 
+function* removeFromCollection(action) {
+    const gameId = action.payload;
+    try {
+        yield axios.delete(`/collection/${gameId}`);
+    } catch (error) {
+        console.log('Error removing game from user collection. Error:', error);
+    }
+}
+
 function* collectionSaga() {
     yield takeLatest('ADD_TO_COLLECTION', addToCollection);
     yield takeLatest('GET_USER_COLLECTION', getUserCollection);
+    yield takeLatest('REMOVE_FROM_COLLECTION', removeFromCollection);
 }
 
 export default collectionSaga;

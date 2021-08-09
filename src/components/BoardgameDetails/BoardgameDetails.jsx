@@ -55,7 +55,7 @@ function BoardgameDetails({ displayCollection }) {
   const removeFromCollection = (gameId) => {
       console.log('gameId is:', gameId); // test
       console.log('This is where we would remove the game'); // test
-      // TODO:
+      dispatch({ type: 'REMOVE_FROM_COLLECTION', payload: gameId });
   }
 
   const contextualAchievements = () => {
