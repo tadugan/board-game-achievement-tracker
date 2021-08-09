@@ -12,8 +12,6 @@ function BoardgameList( {displayCollection} ) {
   const games = useSelector(store => store.boardgames);
   const [ pageHeader, setPageHeader ] = useState('Boardgames');
 
-  const [ displayMode, setDisplayMode ] = useState(displayCollection);
-
   const getAllBoardgames = () => {
       dispatch({ type: 'GET_ALL_BOARDGAMES' });
   }

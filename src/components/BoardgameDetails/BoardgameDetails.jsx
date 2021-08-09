@@ -33,6 +33,7 @@ function BoardgameDetails({ displayCollection }) {
   const boardgameDetails = useSelector(store => store.gameDetails);
   const boardgameAchievements = useSelector(store => store.gameAchievements);
   const userAchievements = useSelector(store => store.userAchievements);
+  const userCollection = useSelector(store => store.boardgames);
 
   const [ displayMode, setDisplayMode ] = useState(displayCollection);
 
@@ -164,14 +165,9 @@ function BoardgameDetails({ displayCollection }) {
     history.push(destination);
   }
 
-  const isThisHappening = () => {
-      console.log('useEffect is occuring.');
-  }
-
   useEffect(() => {
     getBoardgameDetails(params.id);
     getUserAchievements(params.id);
-    isThisHappening();
   }, []);
 
   return (

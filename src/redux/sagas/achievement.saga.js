@@ -21,13 +21,9 @@ function* getGameAchievements(action) {
 }
 
 function* getUserAchievements(action) {
-    console.log('in getUserAchievements');
-    console.log('action is:', action);
     const gameId = action.payload.id;
-    console.log('gameId is:', gameId);
     try {
         const userAchievements = yield axios.get(`/achievement/user/${gameId}`);
-        console.log('userAchievements.data:', userAchievements.data);
         yield put({ type: 'SET_USER_ACHIEVEMENTS', payload: userAchievements.data })
     } catch (error) {
         console.log('Error GETTING user achievements for one game. Error:', error);
@@ -37,7 +33,6 @@ function* getUserAchievements(action) {
 function* markAchievementComplete(action) {
     const achievementId = action.payload.achievementId;
     const gameId = action.payload.boardgameId;
-    console.log('PROBLEM:', action.payload);
     try {
         yield axios.post(`/achievement/user/complete/${achievementId}`);
         yield put({ type: 'GET_USER_ACHIEVEMENTS', payload: { id: gameId }});
