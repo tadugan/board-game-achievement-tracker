@@ -1,12 +1,27 @@
+import { Button, Grid, makeStyles, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
+
+const useStyles = makeStyles({
+  root: {
+    textAlign: "center",
+  },
+  input: {
+    margin: "8px 0 8px 0",
+    width: "250px"
+  },
+  submit: {
+    margin: "16px 0 0 0"
+  },
+});
 
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const errors = useSelector(store => store.errors);
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   const login = (event) => {
     event.preventDefault();
@@ -32,33 +47,42 @@ function LoginForm() {
           {errors.loginMessage}
         </h3>
       )}
-      <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            required
+      <Grid
+        container 
+        spacing={0}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item xs={12}>
+          <TextField 
+            id="username" 
+            label="Username" 
+            variant="filled"
             value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
             required
+            onChange={(event) => setUsername(event.target.value)}
+            className={classes.input} 
+          /> 
+        </Grid>
+        <Grid item xs={12}>
+          <TextField 
+            id="password"
+            type="password" 
+            label="Password" 
+            variant="filled"
             value={password}
+            required
             onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
-      </div>
+            className={classes.input} 
+          /> 
+        </Grid>
+        <Grid item xs={12}>
+        <Button variant="contained" color="primary" type="submit" className={classes.submit}>
+          Login
+        </Button>
+        </Grid>
+      </Grid>
     </form>
   );
 }
