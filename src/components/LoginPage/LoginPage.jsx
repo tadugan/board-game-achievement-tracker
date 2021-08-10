@@ -19,14 +19,15 @@ function LoginPage() {
       <LoginForm />
 
       <center>
+        <h4>New to the app?</h4>
         <Button 
             variant="contained" 
             type="button" 
             className={classes.button} 
             onClick={() => {
-              history.push('/login');
+              history.push('/registration');
             }}>
-            Register
+            Register Here
           </Button>
       </center>
     </div>

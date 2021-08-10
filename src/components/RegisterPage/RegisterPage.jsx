@@ -18,7 +18,7 @@ function RegisterPage() {
   return (
     <div>
       <RegisterForm />
-
+      <h4>Already a User?</h4>
       <center>
         <Button 
           variant="contained" 
@@ -27,7 +27,7 @@ function RegisterPage() {
           onClick={() => {
             history.push('/login');
           }}>
-          Login
+          Login Here
         </Button>
       </center>
     </div>
