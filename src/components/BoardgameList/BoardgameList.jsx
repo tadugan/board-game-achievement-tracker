@@ -1,12 +1,21 @@
-import { Grid } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import BackButton from '../BackButton/BackButton';
 import BoardgameCard from '../BoardgameCard/BoardgameCard';
 
+const useStyles = makeStyles({
+  root: {
+    textAlign: "center",
+    maxWidth: 540,
+    margin: "auto",
+  },
+});
 
 function BoardgameList( {displayCollection} ) {
+
+  const classes = useStyles();
 
   const dispatch = useDispatch();
   const games = useSelector(store => store.boardgames);
@@ -36,7 +45,7 @@ function BoardgameList( {displayCollection} ) {
   }, []);
 
   return (
-    <div>
+    <div className={classes.root}>
       <h2>{pageHeader}</h2>
       <BackButton destination="/user" />
       <Grid 

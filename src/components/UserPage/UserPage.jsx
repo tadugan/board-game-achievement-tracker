@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     margin: "auto",
   },
   achievement: {
-    maxWidth: "352px",
+    maxWidth: 352,
     margin: "0px"
   },
   button: {
