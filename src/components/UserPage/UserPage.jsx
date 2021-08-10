@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import AchievementCard from '../AchievementCard/AchievementCard';
 import { Grid, makeStyles } from '@material-ui/core';
+import { Person } from '@material-ui/icons';
 
 const useStyles = makeStyles({
   root: {
@@ -55,6 +56,19 @@ function UserPage() {
     dispatch({ type: 'GET_PROFILE_ACHIEVEMENTS'});
   }
 
+  const conditionalProfileImage = () => {
+    if (user.profile_image_url) {
+      return (
+        <img src={user.profile_image_url} className={classes.image}/>
+      );
+    }
+    else {
+      return (
+        <Person className={classes.image}/>
+      );
+    }
+  }
+
   useEffect(() => {
     getProfileAchievements();
   }, []);
@@ -78,7 +92,7 @@ function UserPage() {
           alignItems="center"
         >
           <Grid item xs={6}>
-            <img src={user.profile_image_url} className={classes.image}/>
+            {conditionalProfileImage()}
           </Grid>
           <Grid item xs={6}>
             <h3 className={classes.name}>{user.first_name} {user.last_name}</h3>
