@@ -18,11 +18,26 @@ const useStyles = makeStyles({
         margin: "8px 0 8px 0",
     },
     checkbox: {
-        fontSize: '2.5rem'
+        fontSize: '2.5rem',
     },
     emoticon: {
-      fontSize: '2.5rem'
-  },
+      fontSize: '2.5rem',
+    },
+    difficulty_hard: {
+      fontSize: '1rem',
+      backgroundColor: "salmon",
+      padding: "8px 0 8px 0",
+    },
+    difficulty_moderate: {
+      fontSize: '1rem',
+      backgroundColor: "lightgreen",
+      padding: "8px 0 8px 0",
+    },
+    difficulty_easy: {
+      fontSize: '1rem',
+      backgroundColor: "lightblue",
+      padding: "8px 0 8px 0",
+    },
   });
 
 function AchievementCard({ achievement, displayCollection }) {
@@ -84,6 +99,25 @@ function AchievementCard({ achievement, displayCollection }) {
     }
   }
 
+  const checkDifficulty = (difficulty) => {
+    switch (difficulty) {
+      case "hard":
+        return (
+          classes.difficulty_hard
+        );
+      case "moderate":
+        return (
+          classes.difficulty_moderate
+        );
+      case "easy":
+        return (
+          classes.difficulty_easy
+        );
+      default:
+        break;
+    }
+  }
+
   return (
     <Card className={classes.card}>
       <Grid 
@@ -107,6 +141,9 @@ function AchievementCard({ achievement, displayCollection }) {
             {conditionalStatus()}
           </Grid>
           {conditionalCheckbox()}
+          <Grid item xs={12} className={checkDifficulty(achievement.difficulty)}>
+            {achievement.difficulty}
+          </Grid>
       </Grid>
     </Card>
   );
