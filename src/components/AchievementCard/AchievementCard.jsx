@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Button, Grid, makeStyles } from '@material-ui/core';
-import { CheckBoxOutlined, InsertEmoticon } from '@material-ui/icons';
+import { CheckBoxOutlineBlank, CheckBoxOutlined, InsertEmoticon } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles({
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
       fontSize: "12px"
     },
     card: {
-        minWidth: 275,
+        width: 320,
         margin: "8px 0 8px 0",
     },
     checkbox: {
@@ -85,7 +85,7 @@ function AchievementCard({ achievement, displayCollection }) {
               variant="contained"
               onClick={() => completeAchievement(achievement.id, achievement.boardgame_id)}
             > 
-              <CheckBoxOutlined className={classes.checkbox}/>
+              <CheckBoxOutlineBlank className={classes.checkbox}/>
             </Button>
           </Grid>
         );
@@ -93,7 +93,7 @@ function AchievementCard({ achievement, displayCollection }) {
     else {
         return (
           <Grid item xs={4}>
-            <InsertEmoticon className={classes.emoticon}/>
+            <CheckBoxOutlined className={classes.emoticon}/>
           </Grid>
         );
     }

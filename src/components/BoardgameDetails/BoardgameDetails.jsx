@@ -9,6 +9,10 @@ import AchievementCard from '../AchievementCard/AchievementCard';
 const useStyles = makeStyles({
     root: {
       textAlign: "center",
+      maxWidth: 400,
+      margin: "auto",
+    },
+    container: {
     },
     title: {
         fontSize: 14,
@@ -218,9 +222,10 @@ function BoardgameDetails({ displayCollection }) {
         <Grid 
             container 
             spacing={0}
-            direction="row"
+            direction="column"
             justifyContent="center"
             alignItems="center"
+            className={classes.container}
         >
             <Grid 
                 item 
