@@ -9,6 +9,8 @@ import { Grid, makeStyles } from '@material-ui/core';
 const useStyles = makeStyles({
   root: {
     textAlign: "center",
+    maxWidth: 400,
+    margin: "auto",
   },
   achievement: {
     maxWidth: "352px",
@@ -17,6 +19,14 @@ const useStyles = makeStyles({
   button: {
     margin: "16px",
     width: "200px",
+  },
+  image: {
+    margin: "0 0 0 20px",
+    width: 100,
+    height: 100,
+  },
+  name: {
+    margin: "0 20px 0 0",
   },
 });
 
@@ -55,15 +65,24 @@ function UserPage() {
       <Grid 
         container 
         spacing={0}
-        direction="row"
+        direction="column"
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item xs={12}>
-          <img src={user.profile_image_url} height="100px" width="100px"/>
-        </Grid>
-        <Grid item xs={12}>
-          <h3>{user.first_name} {user.last_name}</h3>
+        <Grid 
+          item 
+          container 
+          spacing={0}
+          direction="row"
+          justifyContent="space-evenly"
+          alignItems="center"
+        >
+          <Grid item xs={6}>
+            <img src={user.profile_image_url} className={classes.image}/>
+          </Grid>
+          <Grid item xs={6}>
+            <h3 className={classes.name}>{user.first_name} {user.last_name}</h3>
+          </Grid>
         </Grid>
         <Grid item xs={12}>
           <h4>Current Favorite Game: {user.current_favorite_game}</h4>
