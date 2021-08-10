@@ -1,18 +1,30 @@
+import { Button, makeStyles } from '@material-ui/core';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
+const useStyles = makeStyles({
+  logout: {
+    textAlign: "center",
+    width: "200px",
+    margin: "16px 0",
+
+  },
+});
+
 function LogOutButton(props) {
   const dispatch = useDispatch();
+
+  const classes = useStyles();
+
   return (
-    <button
-      // This button shows up in multiple locations and is styled differently
-      // because it's styled differently depending on where it is used, the className
-      // is passed to it from it's parents through React props
-      className={props.className}
+    <Button
+      className={classes.logout}
       onClick={() => dispatch({ type: 'LOGOUT' })}
+      variant="contained"
+      color="secondary"
     >
-      Log Out
-    </button>
+      Logout
+    </Button>
   );
 }
 
