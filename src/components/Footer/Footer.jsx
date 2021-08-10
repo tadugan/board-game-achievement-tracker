@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     width: '100%',
     position: 'fixed',
     bottom: 0,
-    backgroundColor: '#965322',
+    backgroundColor: '#cb804d',
   },
   icon: {
     fontSize: '2.5rem',
