@@ -15,6 +15,7 @@ const useStyles = makeStyles({
     },
     card: {
         minWidth: 275,
+        maxWidth: 320,
         margin: "8px 0 8px 0",
     },
     checkbox: {

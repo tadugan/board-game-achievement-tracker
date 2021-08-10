@@ -1,4 +1,4 @@
-import { Button, makeStyles } from '@material-ui/core';
+import { Button, makeStyles, ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
