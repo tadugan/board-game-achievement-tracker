@@ -7,7 +7,7 @@ import AdminAddGame from '../AdminAddGame/AdminAddGame';
 
 function Admin() {
   const [ adminDisplay, setAdminDisplay ] = useState('Add Game');
-  const [ pageHeader, setPageHeader ] = useState('Add Game')
+  const [ pageHeader, setPageHeader ] = useState('Admin')
 
   const changeDisplayMode = (mode) => {
     setAdminDisplay(mode);
