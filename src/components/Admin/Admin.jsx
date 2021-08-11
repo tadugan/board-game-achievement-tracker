@@ -1,11 +1,19 @@
-import { Button, ButtonGroup } from '@material-ui/core';
+import { Button, ButtonGroup, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
 import AdminAddAchievement from '../AdminAddAchievement/AdminAddAchievement';
 import AdminAddGame from '../AdminAddGame/AdminAddGame';
 
+const useStyles = makeStyles({
+  buttonGroup: {
+    margin: "0px 0 24px 0",
+  },
+});
 
 function Admin() {
+
+  const classes = useStyles();
+
   const [ adminDisplay, setAdminDisplay ] = useState('Add Game');
   const [ pageHeader, setPageHeader ] = useState('Admin')
 
@@ -37,6 +45,7 @@ function Admin() {
       <ButtonGroup 
         color="primary"
         variant="contained"
+        className={classes.buttonGroup}
       >
         <Button onClick={() => changeDisplayMode('Add Game')}>Add Game</Button>
         <Button onClick={() => changeDisplayMode('Add Achievement')}>Add Achievement</Button>
