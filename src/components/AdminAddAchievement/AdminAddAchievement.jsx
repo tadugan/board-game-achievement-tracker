@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
 
-function AdminAddGame() {
+function AdminAddAchievement() {
 
   return (
     <div>
-      <h2>Add Game</h2>
+      <h2>Add Achievement</h2>
     </div>
   );
 }
 
-export default AdminAddGame;
+export default AdminAddAchievement;
