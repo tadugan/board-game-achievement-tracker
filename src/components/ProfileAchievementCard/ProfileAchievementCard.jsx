@@ -6,6 +6,7 @@ const useStyles = makeStyles({
     card: {
         width: 320,
         margin: "8px 0 8px 0",
+        backgroundColor: "wheat"
     },
     title: {
         margin: "8px 0 8px 0",

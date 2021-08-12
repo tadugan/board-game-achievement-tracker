@@ -92,7 +92,7 @@ router.put('/user/complete/:id', rejectUnauthenticated, (req, res) => {
 
   let queryText = `
   UPDATE user_achievement_list
-  SET completed = true, date_completed = current_date
+  SET completed = true, date_completed = current_timestamp
   WHERE user_id = $1 AND achievement_id = $2;
   `;
 

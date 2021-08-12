@@ -1,4 +1,4 @@
-import { Button, Grid, makeStyles } from '@material-ui/core';
+import { Button, Grid, makeStyles, Paper } from '@material-ui/core';
 import React, { useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
@@ -12,10 +12,11 @@ const useStyles = makeStyles({
       maxWidth: 400,
       margin: "auto",
     },
-    container: {
-    },
     title: {
         fontSize: 14,
+    },
+    title: {
+        width: "320px",
     },
     pos: {
         marginBottom: 12,
@@ -229,7 +230,6 @@ function BoardgameDetails({ displayCollection }) {
             direction="row"
             justifyContent="center"
             alignItems="center"
-            className={classes.container}
         >
             <Grid
                 item
@@ -241,13 +241,13 @@ function BoardgameDetails({ displayCollection }) {
                 />
             </Grid>
             <Grid
-               item
-               container 
-               spacing={0}
-               xs={6}
-               direction="row"
-               justifyContent="center"
-               alignItems="center" 
+                item
+                container
+                spacing={0}
+                xs={6}
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
             >
                 <Grid
                     item
