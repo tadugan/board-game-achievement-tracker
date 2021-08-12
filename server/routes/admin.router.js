@@ -51,14 +51,16 @@ router.post('/boardgame', rejectUnauthenticated, (req, res) => {
   const newAchievement = req.body;
   const user = req.user;
 
+  console.log('req.body:', req.body);
+
   const queryText = `
   INSERT INTO "achievement" ("boardgame_id", "title", "requirement", "difficulty")
 	VALUES ($1, $2, $3, $4)
   `;
 
   if (user.authority >= 10) {
-    pool.query(queryText, [newAchievement.id, newAchievement.title, newAchievement.requirement, newAchievement.difficulty])
-    .then(reponse => {
+    pool.query(queryText, [newAchievement.gameId, newAchievement.title, newAchievement.requirement, newAchievement.difficulty])
+    .then(response => {
         res.sendStatus(201);
     })
     .catch(error => {

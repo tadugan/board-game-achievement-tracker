@@ -162,7 +162,7 @@ function AdminAddAchievement() {
               </Grid>
           </Grid>
       </form>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: "center", horizontal: "center" }}>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           Achievement sent to Database!
         </Alert>

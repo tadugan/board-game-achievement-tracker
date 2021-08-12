@@ -139,7 +139,7 @@ function AdminAddGame() {
               </Grid>
           </Grid>
       </form>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: "0px", horizontal: "0px" }}>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           Game sent to Database!
         </Alert>
