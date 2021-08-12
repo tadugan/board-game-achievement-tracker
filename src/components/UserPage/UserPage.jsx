@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import AchievementCard from '../AchievementCard/AchievementCard';
 import { Grid, makeStyles, Paper } from '@material-ui/core';
 import { Person } from '@material-ui/icons';
+import ProfileAchievementCard from '../ProfileAchievementCard/ProfileAchievementCard';
 
 const useStyles = makeStyles({
   root: {
@@ -148,7 +149,7 @@ function UserPage() {
         {achievements.map((achievement, index) => {
               return (
                   <Grid item xs={12} md={12} key={index} className={classes.achievement}>
-                    <AchievementCard achievement={achievement}/>
+                    <ProfileAchievementCard achievement={achievement}/>
                   </Grid>
               );
         })}
