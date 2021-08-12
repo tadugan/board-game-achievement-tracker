@@ -27,6 +27,7 @@ const useStyles = makeStyles({
       '& > * + *': {
         marginTop: "16px",
       },
+      marginBottom: "104px",
     },
   });
 
@@ -162,7 +163,7 @@ function AdminAddAchievement() {
               </Grid>
           </Grid>
       </form>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} className={classes.snackbar}>
         <Alert onClose={handleClose} severity="success">
           Achievement sent to Database!
         </Alert>
