@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
 
 /**
  * POST
+ * Admins add a new boardgame to the database
  */
 router.post('/boardgame', rejectUnauthenticated, (req, res) => {
   const newGame = req.body;
