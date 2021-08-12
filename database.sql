@@ -1,5 +1,3 @@
--- UPDATED SQL
-
 -- "user" table
 
 CREATE TABLE "user" (
@@ -11,10 +9,10 @@ CREATE TABLE "user" (
     "authority" INT DEFAULT 0,
     "current_favorite_game" VARCHAR (255),
     "profile_image_url" VARCHAR (1000),
-    "setting_display_order" VARCHAR (20),
-    "setting_display_difficulty" VARCHAR (20),
+    "setting_display_order" VARCHAR (20) DEFAULT 'ASC',
+    "setting_display_difficulty" VARCHAR (20) DEFAULT 'any',
     "setting_display_game_id" INT DEFAULT 0,
-    "setting_profile_privacy" VARCHAR (10)
+    "setting_profile_privacy" VARCHAR (10) DEFAULT 'private'
 );
 
 -- join table for "user" and "boardgame"
@@ -31,8 +29,8 @@ CREATE TABLE "boardgame" (
 	"id" SERIAL PRIMARY KEY,
 	"name" VARCHAR (255),
 	"publisher" VARCHAR (255),
-	"description" VARCHAR (255),
-	"image_url" VARCHAR (255)
+	"description" VARCHAR (1000),
+	"image_url" VARCHAR (1000)
 );
 
 -- "achievement" table
@@ -57,149 +55,39 @@ CREATE TABLE "user_achievement_list" (
 	"boardgame_id" INT REFERENCES "boardgame"("id")
 );
 
-DROP TABLE user_achievement_list;
+-- boardgame data
+INSERT INTO "boardgame" ("name", "publisher", "description", "image_url")
+	VALUES ('CATAN', 'Asmodee NA', 'CATAN description', 'https://upload.wikimedia.org/wikipedia/en/a/a3/Catan-2015-boxart.jpg'), -- id 1 CATAN
+	('X-wing', 'Atomic Mass Games', 'X-wing description', 'https://images-cdn.fantasyflightgames.com/filer_public/ed/f7/edf7085c-cd9d-4c99-9767-6c115ac58127/swz01_box_right.png'), -- id 2 X-wing
+	('Root', 'Leder Games', 'Root description', 'https://cf.geekdo-images.com/JUAUWaVUzeBgzirhZNmHHw__opengraph/img/QypoNrQX9tNBA-A-W9uTvm_eNBM=/fit-in/1200x630/filters:strip_icc()/pic4254509.jpg'),			-- id 3 Root
+	('Marvel Champions', 'Fantasy Flight Games', 'Marvel Champions description', 'https://cf.geekdo-images.com/kRvUgYiaOq07kC67ZK5UoQ__opengraph/img/mRM4HyXvEdJ2XJJNxo1RdJpVkig=/fit-in/1200x630/filters:strip_icc()/pic4900321.jpg'), -- id 4 Marvel Champions
+	('Everdell', 'Starling Games', 'Everdell description', 'https://cf.geekdo-images.com/fjE7V5LNq31yVEW_yuqI-Q__opengraph/img/_PznTHzy-oaTKt6SEVzuhxcCRsw=/fit-in/1200x630/filters:strip_icc()/pic3918905.png'); -- id 5 Everdell
 
--- SELECT
-
-SELECT * FROM "user";
-
-SELECT * FROM "user_boardgame_list";
-
-SELECT * FROM "boardgame";
-
-SELECT * FROM "achievement";
-
-SELECT * FROM "user_achievement_list";
-
--- update details for user where id is 1
-UPDATE "user"
-SET first_name = 'Tim', last_name = 'Dugan', current_favorite_game = 'Root', profile_image_url = 'https://www.qsrmagazine.com/sites/default/files/styles/story_page/public/phut_0.jpg?itok=h30EAnkk', setting_display_order = 'ASC', setting_display_difficulty = 'any', setting_display_game_id = 1, setting_profile_privacy = 'public'
-WHERE id = 1;
-
--- add an image url to a boardgame
-UPDATE "boardgame"
-SET image_url = 'https://cf.geekdo-images.com/fjE7V5LNq31yVEW_yuqI-Q__opengraph/img/_PznTHzy-oaTKt6SEVzuhxcCRsw=/fit-in/1200x630/filters:strip_icc()/pic3918905.png'
-WHERE id = 5;
-
--- boardgame test data
-INSERT INTO "boardgame" ("name", "publisher", "description")
-	VALUES ('CATAN', 'Asmodee NA', 'CATAN description'), -- id 1 CATAN
-	('X-wing', 'Atomic Mass Games', 'X-wing description'), -- id 2 X-wing
-	('Root', 'Leder Games', 'Root description'),			-- id 3 Root
-	('Marvel Champions', 'Fantasy Flight Games', 'Marvel Champions description'), -- id 4 Marvel Champions
-	('Everdell', 'Starling Games', 'Everdell description'); -- id 5 Everdell
-
--- generic test data for achievements
+-- Insert testing data for achievements
 INSERT INTO "achievement" ("boardgame_id", "title", "requirement", "difficulty")
-	VALUES ('1', 'CATAN achievement 1', 'CATAN requirement 1', 'easy'),
-	('1', 'CATAN achievement 2', 'CATAN requirement 2', 'moderate'),
-	('1', 'CATAN achievement 3', 'CATAN requirement 3', 'hard'),
-	('2', 'X-wing achievement 1', 'X-wing requirement 1', 'easy'),
-	('2', 'X-wing achievement 2', 'X-wing requirement 2', 'moderate'),
-	('2', 'X-wing achievement 3', 'X-wing requirement 3', 'hard'),
-	('3', 'Root achievement 1', 'Root requirement 1', 'easy'),
-	('3', 'Root achievement 2', 'Root requirement 2', 'moderate'),
-	('3', 'Root achievement 3', 'Root requirement 3', 'hard'),
-	('4', 'Marvel Champions achievement 1', 'Marvel Champions requirement 1', 'easy'),
-	('4', 'Marvel Champions achievement 2', 'Marvel Champions requirement 2', 'moderate'),
-	('4', 'Marvel Champions achievement 3', 'Marvel Champions requirement 3', 'hard'),
-	('5', 'Everdell achievement 1', 'Everdell requirement 1', 'easy'),
-	('5', 'Everdell achievement 2', 'Everdell requirement 2', 'moderate'),
-	('5', 'Everdell achievement 3', 'Everdell requirement 3', 'hard');
-	
--- Add some completed achievements to user id 1
+	VALUES ('1', 'A Humble Village', 'Win a game without any Cities', 'hard'),
+	('1', 'The Road Less Traveled', 'The Road Less Traveled', 'moderate'),
+	('1', 'A Bad Deal', 'Trade at least 4 of one resource type other player(s) in one turn, then reclaim them with a Monopoly card. ', 'moderate'),
+	('1', 'An Empire', 'Win a game with the Longest Road and Largest Army.', 'easy'),
+	('1', 'Fledgling Seafarer', 'Control at least 3 ports.', 'moderate'),
+	('2', 'Rookies', 'Win a game without having any unique character in your squad list.', 'moderate'),
+	('2', 'I got one!', 'Destroy a full health Tie Fighter with one shot', 'moderate'),
+	('2', 'Use the Force', 'Hit a target with a Torpedo or Missile fired using Instinctive Aim.', 'easy'),
+	('2', 'That was too close...', 'Win a game with only 1 ship, with 1 hit point remaining.', 'hard'),
+	('2', 'I''ve got a bad feeling about this', 'Win a game where all the opposing ships'' initiatives are higher than your own.', 'hard'),
+	('3', 'The Royal Family', 'Win a game with the King, the Queen, the Castle, and the Palace in your city.', 'hard'),
+	('3', 'Under the Evertree', 'Build the Evertree', 'easy'),
+	('3', 'No time for jokes', 'Put the Fool into the Dungeon', 'easy'),
+	('3', 'Family Frenzy', 'Have 3 Wife/Husband pairs in your city.', 'moderate'),
+	('3', 'Overachiever', 'Claim 3 special events in one game', 'moderate'),
+	('4', 'Age of Ultron', 'Defeat Ultron on Expert Mode', 'hard'),
+	('4', 'Avenger''s Assemble', 'Win a game where each player only used Heroes and Allies with the "Avenger" trait', 'moderate'),
+	('4', 'She-Hulk Smash', 'Deal 15 Damage with "Gamma Slam"', 'moderate'),
+	('4', 'My Spider-Sense is Tingling', 'Use "Enhanced Spider-sense" to cancel the effects of "Shadow of the Past"', 'easy'),
+	('4', 'Just the Beginning...', 'Defeat Rhino on any difficulty', 'easy'),
+	('5', 'If I fits, I sits', 'Win a game as the Marquise de Cat', 'moderate'),
+	('5', 'All Alone', 'Win a game as the Vagabond', 'moderate'),
+	('5', 'A Forest United', 'Win a game as the Woodland Alliance', 'moderate'),
+	('5', 'The Empire Strikes Back', 'Win a game as the Eyrie Dynasties', 'moderate'),
+	('5', 'Dominance', 'Win a game with a Dominance card', 'hard');
 
-INSERT INTO "user_achievement_list" ("user_id", "achievement_id", "completed", "date_completed")
-	VALUES (1, 1, true, CURRENT_DATE),
-	(1, 2, true, CURRENT_DATE),
-	(1, 3, false, CURRENT_DATE),
-	(1, 7, true, CURRENT_DATE),
-	(1, 8, true, CURRENT_DATE),
-	(1, 9, true, CURRENT_DATE),
-	(1, 13, true, CURRENT_DATE),
-	(1, 14, false, CURRENT_DATE),
-	(1, 15, false, CURRENT_DATE);
-	
--- get 4 most recent achievements for a user
-
-SELECT boardgame.name, achievement.title
-FROM user_achievement_list
-JOIN "user" ON user_achievement_list.user_id = "user".id
-JOIN achievement ON user_achievement_list.achievement_id = achievement.id
-JOIN boardgame ON achievement.boardgame_id = boardgame.id
-WHERE user_id = 1 AND completed = true
-ORDER BY date_completed LIMIT 4;
-
--- Select all games from "boardgame"
-SELECT *
-FROM "boardgame"
-ORDER BY name ASC;
-
--- Select a Game and all of it's details
-
-SELECT * 
-FROM boardgame
-WHERE id = 1;
-
--- Select all achievement from 1 game
-SELECT achievement.title, achievement.requirement, achievement.difficulty, achievement.id
-FROM achievement
-JOIN boardgame ON achievement.boardgame_id = boardgame.id
-WHERE boardgame_id = 1
-ORDER BY achievement.id ASC;
-
--- Add a game to the user's collection
-INSERT INTO user_boardgame_list ("user_id", "boardgame_id")
-	VALUES ('1', '1');
-
-SELECT * FROM "user_boardgame_list";
-
-SELECT * FROM "user_achievement_list";
-
-DELETE FROM "user_boardgame_list" WHERE user_id = 1;
-
-DELETE FROM "user_achievement_list" WHERE user_id = 1;
-
--- Add an achievement to the user_achievement_list
-INSERT INTO user_achievement_list ("user_id", "achievement_id", "boardgame_id")
-	VALUES ('2', '1', '1'),
-	('2', '2', '1'),
-	('2', '3', '1'),
-	('2', '4', '1'),
-	('2', '5', '1'),
-	('2', '6', '1');
-	
--- Select all games in a users collection
-SELECT boardgame.id, boardgame.publisher, boardgame.description, boardgame.image_url, boardgame.id
-FROM user_boardgame_list
-JOIN boardgame ON user_boardgame_list.boardgame_id = boardgame.id
-WHERE user_id = 1
-ORDER BY boardgame."name" ASC;
-
--- Select all of a users achievements for one game
-SELECT achievement.id, user_achievement_list.completed, user_achievement_list.date_completed, achievement.title, achievement.requirement, achievement.difficulty, achievement.boardgame_id
-FROM user_achievement_list
-JOIN achievement ON user_achievement_list.achievement_id = achievement.id
-WHERE user_id = 1 AND achievement.boardgame_id = 2;
-
--- Update a table to mark an achievement as complete
-UPDATE user_achievement_list
-SET completed = true
-WHERE user_id = 1 AND achievement_id = 2;
-
-UPDATE user_achievement_list
-SET completed = false
-WHERE user_id = 1;
-
--- DELETE a game from a user's collection
-DELETE
-FROM user_boardgame_list
-WHERE user_id = 1 AND boardgame_id = 1;
-
--- DELETE all user achievements for one game
-DELETE
-FROM user_achievement_list
-WHERE user_id = 2 AND boardgame_id = 1;
-
-SELECT * FROM "user_achievement_list";
-SELECT * FROM "user_boardgame_list";

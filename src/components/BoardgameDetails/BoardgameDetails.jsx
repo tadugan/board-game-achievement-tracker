@@ -1,4 +1,4 @@
-import { Button, Grid, makeStyles } from '@material-ui/core';
+import { Button, Grid, makeStyles, Paper } from '@material-ui/core';
 import React, { useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
@@ -12,10 +12,11 @@ const useStyles = makeStyles({
       maxWidth: 400,
       margin: "auto",
     },
-    container: {
-    },
     title: {
         fontSize: 14,
+    },
+    title: {
+        width: "320px",
     },
     pos: {
         marginBottom: 12,
@@ -23,6 +24,10 @@ const useStyles = makeStyles({
     button: {
         margin: "8px 0 8px 0",
         width: "250px",
+    },
+    image: {
+        maxWidth: "140px",
+        margin: "0 0 0 16px"
     },
   });
 
@@ -222,36 +227,43 @@ function BoardgameDetails({ displayCollection }) {
         <Grid 
             container 
             spacing={0}
-            direction="column"
+            direction="row"
             justifyContent="center"
             alignItems="center"
-            className={classes.container}
         >
-            <Grid 
-                item 
-                xs={5}
+            <Grid
+                item
+                xs={6}
+                className={classes.image}
             >
-                <img 
-                src={boardgameDetails.image_url} 
-                height="150px"
-                width="150px"
+                <img
+                src={boardgameDetails.image_url}
                 />
             </Grid>
             <Grid
                 item
-                xs={4}
+                container
+                spacing={0}
+                xs={6}
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
             >
-                <div>{boardgameDetails.publisher}</div>
-                <div>DATE</div>
-            </Grid>
-            <Grid
-                item
-                xs={12}
-            >
-                <h3>{boardgameDetails.name}</h3>
+                <Grid
+                    item
+                    xs={12}
+                >
+                    <h3>{boardgameDetails.name}</h3>
+                </Grid>
+                <Grid
+                    item
+                    xs={12}
+                >
+                    <h5>{boardgameDetails.publisher}</h5>
+                </Grid>
             </Grid>
             {conditionalButtons()}
-            <Grid item xs={10}>
+            <Grid item xs={12}>
                 <h3>Achievements:</h3>
             </Grid>
             {conditionalAchievements()}

@@ -11,16 +11,16 @@ const router = express.Router();
 router.get('/profile', rejectUnauthenticated, (req, res) => {
     const user = req.user;
     const queryText = `
-    SELECT boardgame.name, achievement.title
+    SELECT boardgame.name, achievement.title, boardgame.id, achievement.difficulty, user_achievement_list.date_completed
     FROM user_achievement_list
     JOIN "user" ON user_achievement_list.user_id = "user".id
     JOIN achievement ON user_achievement_list.achievement_id = achievement.id
     JOIN boardgame ON achievement.boardgame_id = boardgame.id
-    WHERE user_id = 1 AND completed = true
-    ORDER BY date_completed LIMIT 4;
+    WHERE user_id = $1 AND completed = true
+    ORDER BY user_achievement_list.date_completed DESC LIMIT 3;
     `;
 
-    pool.query(queryText)
+    pool.query(queryText, [user.id])
         .then(response => {
             console.log('Response is:', response); // test
             res.send(response.rows);
@@ -83,16 +83,16 @@ router.get('/profile', rejectUnauthenticated, (req, res) => {
 
 
 /**
- * POST
+ * PUT
  * Mark a single achievement as complete
  */
-router.post('/user/complete/:id', rejectUnauthenticated, (req, res) => {
+router.put('/user/complete/:id', rejectUnauthenticated, (req, res) => {
   const achievementId = req.params.id;
   const user = req.user.id;
 
   let queryText = `
   UPDATE user_achievement_list
-  SET completed = true
+  SET completed = true, date_completed = current_timestamp
   WHERE user_id = $1 AND achievement_id = $2;
   `;
 
