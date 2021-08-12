@@ -87,6 +87,24 @@ function UserPage() {
     }
   }
 
+  const conditionalAdminButton = () => {
+    if (user.authority >= 10) {
+        return (
+          <Button
+          type="button"
+          onClick={() => handleClick('/admin')}
+          variant="contained"
+          className={classes.button}
+        >
+          Admin
+        </Button>
+        );
+    }
+    else {
+      return;
+    }
+  }
+
   useEffect(() => {
     getProfileAchievements();
   }, []);
@@ -155,14 +173,7 @@ function UserPage() {
           </Button>
         </Grid>
         <Grid item xs={12}>
-          <Button
-            type="button"
-            onClick={() => handleClick('/admin')}
-            variant="contained"
-            className={classes.button}
-          >
-            Admin
-          </Button>
+          {conditionalAdminButton()}
         </Grid>
         <Grid item xs={7}>
           <LogOutButton className="btn" />

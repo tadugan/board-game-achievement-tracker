@@ -6,7 +6,7 @@ const useStyles = makeStyles({
   logout: {
     textAlign: "center",
     width: "200px",
-    margin: "16px 0",
+    margin: "24px 0 0 0",
 
   },
 });
