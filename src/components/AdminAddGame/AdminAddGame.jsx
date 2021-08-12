@@ -35,8 +35,14 @@ function AdminAddGame() {
           publisher: publisherName,
           description: gameDescription,
           image_url: imageUrl
-      } 
+          } 
       });
+
+      // clear inputs
+      setGameTitle('');
+      setPublisherName('');
+      setGameDescription('');
+      setImageUrl('');
   }
 
   return (
