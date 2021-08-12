@@ -7,8 +7,12 @@ import { CheckBoxOutlineBlank, CheckBoxOutlined, InsertEmoticon } from '@materia
 import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles({
+    achievementTitle: {
+        margin: "16px 0px",
+    },
     requirement: {
-        fontSize: "16px"
+        fontSize: "16px",
+        margin: "0 0 8px 8px",
     },
     status: {
       fontSize: "12px"
@@ -135,7 +139,7 @@ function AchievementCard({ achievement, displayCollection }) {
             spacing={1} 
           >
             <Grid item xs>
-                  <h4>{achievement.title}</h4>
+                  <h4 className={classes.achievementTitle}>{achievement.title}</h4>
                   <p className={classes.requirement}>{achievement.requirement}</p>
             </Grid>
             {conditionalStatus()}

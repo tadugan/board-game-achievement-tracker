@@ -24,6 +24,10 @@ const useStyles = makeStyles({
         margin: "8px 0 8px 0",
         width: "250px",
     },
+    image: {
+        maxWidth: "140px",
+        margin: "0 0 0 16px"
+    },
   });
 
 function BoardgameDetails({ displayCollection }) {
@@ -222,36 +226,44 @@ function BoardgameDetails({ displayCollection }) {
         <Grid 
             container 
             spacing={0}
-            direction="column"
+            direction="row"
             justifyContent="center"
             alignItems="center"
             className={classes.container}
         >
-            <Grid 
-                item 
-                xs={5}
+            <Grid
+                item
+                xs={6}
+                className={classes.image}
             >
-                <img 
-                src={boardgameDetails.image_url} 
-                height="150px"
-                width="150px"
+                <img
+                src={boardgameDetails.image_url}
                 />
             </Grid>
             <Grid
-                item
-                xs={4}
+               item
+               container 
+               spacing={0}
+               xs={6}
+               direction="row"
+               justifyContent="center"
+               alignItems="center" 
             >
-                <div>{boardgameDetails.publisher}</div>
-                <div>DATE</div>
-            </Grid>
-            <Grid
-                item
-                xs={12}
-            >
-                <h3>{boardgameDetails.name}</h3>
+                <Grid
+                    item
+                    xs={12}
+                >
+                    <h3>{boardgameDetails.name}</h3>
+                </Grid>
+                <Grid
+                    item
+                    xs={12}
+                >
+                    <h5>{boardgameDetails.publisher}</h5>
+                </Grid>
             </Grid>
             {conditionalButtons()}
-            <Grid item xs={10}>
+            <Grid item xs={12}>
                 <h3>Achievements:</h3>
             </Grid>
             {conditionalAchievements()}
