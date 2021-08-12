@@ -9,8 +9,18 @@ function* addNewGame(action) {
     }
 }
 
+function* addNewAchievement(action) {
+    try {
+        console.log('action.payload', action.payload); // test
+        yield axios.post('/admin/achievement', action.payload);
+    } catch (error) {
+        console.log('Error adding new achievement. Error:', error);
+    }
+}
+
 function* adminSaga() {
     yield takeLatest('ADMIN_ADD_NEW_GAME', addNewGame);
+    yield takeLatest('ADMIN_ADD_NEW_ACHIEVEMENT', addNewAchievement);
 }
 
 export default adminSaga;
