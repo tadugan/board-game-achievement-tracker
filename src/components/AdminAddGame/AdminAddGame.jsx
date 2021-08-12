@@ -1,6 +1,12 @@
 import { Button, Grid, makeStyles, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles({
     input: {
@@ -10,7 +16,14 @@ const useStyles = makeStyles({
         width: "300px",
     },
     submit: {
-      margin: "16px 0 0 0"
+      margin: "16px 0 0 0",
+      marginBottom: "32px",
+    },
+    snackbar: {
+      width: '100%',
+      '& > * + *': {
+        marginTop: "16px",
+      },
     },
   });
 
@@ -25,6 +38,20 @@ function AdminAddGame() {
   const [ gameDescription, setGameDescription ] = useState('');
   const [ imageUrl, setImageUrl ] = useState('');
 
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   const addGame = () => {
       event.preventDefault();
       console.log('ADD GAME NOW'); // test
@@ -37,6 +64,9 @@ function AdminAddGame() {
           image_url: imageUrl
           } 
       });
+
+      // Display snackbar
+      handleClick();
 
       // clear inputs
       setGameTitle('');
@@ -109,6 +139,11 @@ function AdminAddGame() {
               </Grid>
           </Grid>
       </form>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: "0px", horizontal: "0px" }}>
+        <Alert onClose={handleClose} severity="success">
+          Game sent to Database!
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
