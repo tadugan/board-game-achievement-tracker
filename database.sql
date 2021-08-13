@@ -66,7 +66,7 @@ INSERT INTO "boardgame" ("name", "publisher", "description", "image_url")
 -- Insert testing data for achievements
 INSERT INTO "achievement" ("boardgame_id", "title", "requirement", "difficulty")
 	VALUES ('1', 'A Humble Village', 'Win a game without any Cities', 'hard'),
-	('1', 'The Road Less Traveled', 'The Road Less Traveled', 'moderate'),
+	('1', 'The Road Less Traveled', 'Control a road that is unbroken and 15 segments long', 'moderate'),
 	('1', 'A Bad Deal', 'Trade at least 4 of one resource type other player(s) in one turn, then reclaim them with a Monopoly card. ', 'moderate'),
 	('1', 'An Empire', 'Win a game with the Longest Road and Largest Army.', 'easy'),
 	('1', 'Fledgling Seafarer', 'Control at least 3 ports.', 'moderate'),
@@ -75,19 +75,19 @@ INSERT INTO "achievement" ("boardgame_id", "title", "requirement", "difficulty")
 	('2', 'Use the Force', 'Hit a target with a Torpedo or Missile fired using Instinctive Aim.', 'easy'),
 	('2', 'That was too close...', 'Win a game with only 1 ship, with 1 hit point remaining.', 'hard'),
 	('2', 'I''ve got a bad feeling about this', 'Win a game where all the opposing ships'' initiatives are higher than your own.', 'hard'),
-	('3', 'The Royal Family', 'Win a game with the King, the Queen, the Castle, and the Palace in your city.', 'hard'),
-	('3', 'Under the Evertree', 'Build the Evertree', 'easy'),
-	('3', 'No time for jokes', 'Put the Fool into the Dungeon', 'easy'),
-	('3', 'Family Frenzy', 'Have 3 Wife/Husband pairs in your city.', 'moderate'),
-	('3', 'Overachiever', 'Claim 3 special events in one game', 'moderate'),
+	('5', 'The Royal Family', 'Win a game with the King, the Queen, the Castle, and the Palace in your city.', 'hard'),
+	('5', 'Under the Evertree', 'Build the Evertree', 'easy'),
+	('5', 'No time for jokes', 'Put the Fool into the Dungeon', 'easy'),
+	('5', 'Family Frenzy', 'Have 3 Wife/Husband pairs in your city.', 'moderate'),
+	('5', 'Overachiever', 'Claim 3 special events in one game', 'moderate'),
 	('4', 'Age of Ultron', 'Defeat Ultron on Expert Mode', 'hard'),
 	('4', 'Avenger''s Assemble', 'Win a game where each player only used Heroes and Allies with the "Avenger" trait', 'moderate'),
 	('4', 'She-Hulk Smash', 'Deal 15 Damage with "Gamma Slam"', 'moderate'),
 	('4', 'My Spider-Sense is Tingling', 'Use "Enhanced Spider-sense" to cancel the effects of "Shadow of the Past"', 'easy'),
 	('4', 'Just the Beginning...', 'Defeat Rhino on any difficulty', 'easy'),
-	('5', 'If I fits, I sits', 'Win a game as the Marquise de Cat', 'moderate'),
-	('5', 'All Alone', 'Win a game as the Vagabond', 'moderate'),
-	('5', 'A Forest United', 'Win a game as the Woodland Alliance', 'moderate'),
-	('5', 'The Empire Strikes Back', 'Win a game as the Eyrie Dynasties', 'moderate'),
-	('5', 'Dominance', 'Win a game with a Dominance card', 'hard');
+	('3', 'If I fits, I sits', 'Win a game as the Marquise de Cat', 'moderate'),
+	('3', 'All Alone', 'Win a game as the Vagabond', 'moderate'),
+	('3', 'A Forest United', 'Win a game as the Woodland Alliance', 'moderate'),
+	('3', 'The Empire Strikes Back', 'Win a game as the Eyrie Dynasties', 'moderate'),
+	('3', 'Dominance', 'Win a game with a Dominance card', 'hard');
 
